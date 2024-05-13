@@ -1,0 +1,26 @@
+.container {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    align-items: center;
+  }
+  
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .card-image {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
