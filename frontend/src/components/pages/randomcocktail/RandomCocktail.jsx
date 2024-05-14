@@ -45,7 +45,7 @@ const RandomCocktail = () => {
                       <li key={key}>{cocktail[key]}</li>
                     ))}
                 </ul>
-                {/* button fetches and displays again */}
+                {/* button fetches and displays again if wanted by user */}
                 <Button variant="primary" onClick={fetchRandomCocktail}>Get Another Cocktail</Button>
               </Card.Body>
             </Card>

@@ -74,7 +74,7 @@ h1 {
       font-size: 14px;
       border: 1px solid black;
       border-radius: 10px;
-      z-index: 9999; /* Ensure it's above other content */
+      z-index: 9999; /* makes it above other content */
     }
   }
   
