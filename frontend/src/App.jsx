@@ -9,6 +9,8 @@ import IngredientPickerPage from './components/pages/pick-ingredients/Ingredient
 import Footer from './components/layout/Footer.jsx'
 import Navbar from './components/layout/Navbar.jsx';
 
+import "./index.css"
+
 function App() {
   return (
     <Router>
