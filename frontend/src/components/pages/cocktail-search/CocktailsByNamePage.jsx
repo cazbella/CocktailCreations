@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import CocktailsByNameFetch from './CocktailsByNameFetch';
 
+import "./CocktailsByNamePage.css"
+
 // state to set cocktail
 const CocktailSearchPage = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
