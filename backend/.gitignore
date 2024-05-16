@@ -8,6 +8,7 @@ __pycache__/
 
 ipython_config
 /config.py
+config.py
 
 # Distribution / packaging
 .Python
@@ -124,14 +125,10 @@ celerybeat.pid
 
 # Environments
 .env
-.venv
-/venv
 /env
 env/
-venv/
 ENV/
 env.bak/
-venv.bak/
 
 # Spyder project settings
 .spyderproject

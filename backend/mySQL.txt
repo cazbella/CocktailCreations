@@ -1,0 +1,63 @@
+CREATE DATABASE cocktailsdb
+
+USE cocktailsdb
+
+CREATE TABLE cocktail_names (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE ingredients (
+    cocktail_id VARCHAR(255) PRIMARY KEY,
+    ingredient1 VARCHAR(255),
+    ingredient2 VARCHAR(255),
+    ingredient3 VARCHAR(255),
+    ingredient4 VARCHAR(255),
+    ingredient5 VARCHAR(255),
+    ingredient6 VARCHAR(255),
+    ingredient7 VARCHAR(255),
+    ingredient8 VARCHAR(255),
+    ingredient9 VARCHAR(255),
+    ingredient10 VARCHAR(255),
+    ingredient11 VARCHAR(255),
+    ingredient12 VARCHAR(255),
+    ingredient13 VARCHAR(255),
+    ingredient14 VARCHAR(255),
+    ingredient15 VARCHAR(255)
+);
+
+CREATE TABLE instructions (
+    cocktail_id VARCHAR(255) PRIMARY KEY,
+    instructions TEXT
+);
+
+CREATE TABLE images (
+    cocktail_id VARCHAR(255) PRIMARY KEY,
+    image_url VARCHAR(255)
+);
+
+CREATE TABLE videos (
+    cocktail_id VARCHAR(255) PRIMARY KEY,
+    video_url VARCHAR(255)
+);
+
+CREATE TABLE drinks_information (
+    id VARCHAR(255) PRIMARY KEY,
+    category VARCHAR(255),
+    type VARCHAR(255)
+    strIBA VARCHAR(255),
+    strTags VARCHAR(255),
+    dateModified DATETIME
+);
+
+CREATE TABLE glass_type (
+    cocktail_id VARCHAR(255),
+    glass VARCHAR(255),
+    PRIMARY KEY (cocktail_id, glass)
+);
+
+CREATE TABLE alcoholic_status (
+    cocktail_id VARCHAR(255),
+    status VARCHAR(255),
+    PRIMARY KEY (cocktail_id, status)
+);
