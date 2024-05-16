@@ -1,5 +1,6 @@
 import React from 'react';
 import RandomCocktail from './RandomCocktail';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RandomCocktailPage = () => {
   return (

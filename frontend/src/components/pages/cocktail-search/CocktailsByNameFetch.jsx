@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CocktailsByNameFetch = ({ setError, onSelectCocktail }) => {
   //state variables

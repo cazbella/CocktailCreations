@@ -1,6 +1,7 @@
 //displays list of ingredients fetched from Cocktails DB
 //useState and useEffect hooks to manage component state 
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './IngredientPicker.css'
 

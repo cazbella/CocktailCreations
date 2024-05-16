@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CocktailsByNameFetch from './CocktailsByNameFetch';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./CocktailsByNamePage.css"
 

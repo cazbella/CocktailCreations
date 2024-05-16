@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import IngredientPickerForm from './IngredientPickerForm';
 import IngredientPickerFetch from './IngredientPickerFetch';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const IngredientPickerPage = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);

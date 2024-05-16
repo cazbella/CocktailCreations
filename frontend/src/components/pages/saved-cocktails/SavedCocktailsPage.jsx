@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SavedCocktailsFetch from './SavedCocktailsFetch';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SavedCocktailsPage = () => {
   const [savedCocktails, setSavedCocktails] = useState([]);
