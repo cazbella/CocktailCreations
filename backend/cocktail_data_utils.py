@@ -56,6 +56,7 @@ class CocktailDB:
                                 (cocktail["idDrink"], cocktail["strDrinkThumb"]))
             print(f"Inserted data into images table for cocktail: {cocktail['strDrink']}")
 
+            # videos
             self.cursor.execute("INSERT INTO videos (cocktail_id, video_url) VALUES (%s, %s)",
                                 (cocktail["idDrink"], cocktail["strVideo"]))
             print(f"Inserted data into videos table for cocktail: {cocktail['strDrink']}")
