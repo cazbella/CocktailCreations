@@ -2,7 +2,7 @@ import requests
 import mysql.connector
 from config import HOST, USER, PASSWORD
 
-# this populates the tables with data from the mySQL.txt
+# this populates the tables with data from the mySQL.txt it is not used by the frontend,. 
 
 db_name = "cocktaildb"
 
