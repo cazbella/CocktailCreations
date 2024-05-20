@@ -9,7 +9,6 @@ import './Navbar.css';
 function CustomNavbar() {
   const [expanded, setExpanded] = useState(false);
 
-  //closes menu when an option is clicked.
   const closeMenu = () => setExpanded(false);
 
   return (

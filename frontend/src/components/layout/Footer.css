@@ -1,33 +1,26 @@
+.custom-footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 1rem;
+  height: 70px; /* Ensure height is consistent */
+  padding: 10px 20px; /* Ensure padding is consistent */
+}
 
-  
-  .container {
-    flex: 1; /* container grows and takes up space and so fixes footer to the bottom. */
-  }
-  
-  .footer {
-    margin-top: 20px !important;
-    margin-right: 10;
-  }
+.custom-footer .navbar-brand {
+  color: wheat;
+  margin-left: 10px;
+  font-size: 1.5rem; /* Increase font size */
+}
 
-  .custom-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    border-radius: 1rem;
-  }
-  
-  .custom-footer .navbar-brand {
-    color: wheat;
-    margin-left: 10px;
-  }
-  
-  .custom-footer .nav-link {
-    color: beige !important; 
-  }
-  
-  .custom-footer .nav-link:hover {
-    color: #FFA500;
-  }
-  
+.custom-footer .nav-link {
+  color: beige !important; 
+  padding: 10px 15px; /* Ensure padding is consistent */
+}
+
+.custom-footer .nav-link:hover {
+  color: #FFA500;
+}

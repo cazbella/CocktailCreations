@@ -4,3 +4,39 @@
     min-height: 100vh; /* container takes the full height the viewport */
   }
   
+  .home-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .welcome-message {
+    font-size: 2em;
+    margin: 20px;
+  }
+  
+  .image-carousel img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .page-info {
+    margin-top: 20px;
+  }
+  
+  /* Fade in and out animations */
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms;
+  }
+  .fade-exit {
+    opacity: 1;
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 1000ms;
+  }
+  

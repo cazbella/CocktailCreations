@@ -23,5 +23,3 @@ function CustomFooter() {
 }
 
 export default CustomFooter;
-
-
