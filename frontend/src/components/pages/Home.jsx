@@ -3,24 +3,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { CSSTransition } from 'react-transition-group';
 import './Home.css';
 import RoseCocktail from "../../assets/images/cocktail-images/rose.jpeg";
-import NuttyIrishman from "../../assets/images/cocktail-images/nutty-irishman.jpeg";
+import CaptainKidd from "../../assets/images/cocktail-images/captain-kidd-punch.jpeg";
+import ChampagneCocktail from "../../assets/images/cocktail-images/champagne-cocktail.jpeg";
+import Mescal from "../../assets/images/cocktail-images/mescal.jpeg";
+import CubaLibre from "../../assets/images/cocktail-images/cuba-libre.jpeg";
+import Philosopher from "../../assets/images/cocktail-images/philosopher.jpeg";
+import WhiteLady from "../../assets/images/cocktail-images/white-lade.jpeg";
+import Mojito from "../../assets/images/cocktail-images/mojito.jpg";
+import EspressoRumtini from "../../assets/images/cocktail-images/espresso-rumtini.jpeg";
 
 const cocktailImages = [
-  RoseCocktail, NuttyIrishman,
+  RoseCocktail, CaptainKidd, Mescal, CubaLibre, Philosopher, WhiteLady, Mojito, EspressoRumtini, ChampagneCocktail, 
 ];
 
 function Home() {
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [showImages, setShowImages] = useState(false);
+  const [showImages, setShowImages] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    const welcomeTimeout = setTimeout(() => {
-      setShowWelcome(false);
+    setTimeout(() => {
       setShowImages(true);
-    }, 3000); // Display welcome message for 3 seconds
+    }, 3000); // Delay before starting image carousel
 
-    return () => clearTimeout(welcomeTimeout);
+    return () => clearTimeout();
   }, []);
 
   useEffect(() => {
@@ -28,24 +33,21 @@ function Home() {
     if (showImages) {
       imageInterval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % cocktailImages.length);
-      }, 1000); // Change image every second
+      }, 500); // Time to change image
+
+      // Stop changing images after 10 seconds
+      setTimeout(() => {
+        clearInterval(imageInterval);
+      }, 10000);
     }
 
-    const imagesTimeout = setTimeout(() => {
-      setShowImages(false);
-    }, 13000); // Show images for 10 seconds
-
-    return () => {
-      clearInterval(imageInterval);
-      clearTimeout(imagesTimeout);
-    };
+    return () => clearInterval(imageInterval);
   }, [showImages]);
 
   return (
     <div className="home-page">
-      <CSSTransition in={showWelcome} timeout={1000} classNames="fade" unmountOnExit>
-        <div className="welcome-message">Welcome to Cocktail Creations!</div>
-      </CSSTransition>
+      <div className="welcome-message">Cocktail Creations</div>
+      <h3>Your cocktails, mixed your way.</h3>
 
       <CSSTransition in={showImages} timeout={1000} classNames="fade" unmountOnExit>
         <div className="image-carousel">
@@ -53,17 +55,14 @@ function Home() {
         </div>
       </CSSTransition>
 
-      {!showWelcome && !showImages && (
-        <div className="page-info">
-          <header>
-            <h1>Header</h1>
-          </header>
-          <section className="hero">
-            <h1>Welcome to Your Cocktail Creations App</h1>
-            <p>Information...</p>
-          </section>
-        </div>
-      )}
+      <div className="page-info">
+        <section className="hero">
+          <h2>Welcome to Cocktail Creations!</h2>
+          <p>
+          Cocktail Creations is your ultimate destination for crafting and exploring delicious cocktails! Whether you're a seasoned mixologist or a budding enthusiast, Cocktail Creations offers a diverse collection of cocktail recipes to inspire your creativity. Browse through a variety of cocktails and find step-by-step instructions to mix your perfect drink. You can make a random cocktail for a delightful surprise, search for cocktails by name, or find recipes based on specific ingredients you have on hand. Join us on a flavorful journey and elevate your cocktail-making skills from the comfort of your home. Cheers to new creations and delightful sips!
+          </p>
+        </section>
+      </div>
     </div>
   );
 }

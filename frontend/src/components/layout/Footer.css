@@ -6,21 +6,43 @@
   width: 100%;
   z-index: 1000;
   border-radius: 1rem;
-  height: 70px; /* Ensure height is consistent */
-  padding: 10px 20px; /* Ensure padding is consistent */
+  height: 70px;
+  padding: 10px 20px;
+  margin-top: auto;
+}
+
+.custom-footer .navbar-collapse {
+  position: absolute;
+  bottom: 100%; /* position collapse menu above the navbar */
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7); 
+  border-radius: 1rem;
 }
 
 .custom-footer .navbar-brand {
   color: wheat;
   margin-left: 10px;
-  font-size: 1.5rem; /* Increase font size */
+  font-size: 1.5rem;
 }
 
 .custom-footer .nav-link {
-  color: beige !important; 
+  color: beige !important;
   padding: 10px 15px; /* Ensure padding is consistent */
 }
 
 .custom-footer .nav-link:hover {
   color: #FFA500;
+}
+
+/* .custom-footer .navbar-toggler {
+  margin-right: px; 
+} */
+
+.custom-navbar .navbar-collapse {
+  /* background colour with transparency */
+}
+
+.custom-navbar .navbar-collapse.show {
+  background-color: rgba(0, 0, 0, 0.7); /* background colour when expanded with transparency */
 }
