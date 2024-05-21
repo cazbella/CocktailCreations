@@ -39,10 +39,6 @@
   margin-right: px; 
 } */
 
-.custom-navbar .navbar-collapse {
-  /* background colour with transparency */
-}
-
 .custom-navbar .navbar-collapse.show {
   background-color: rgba(0, 0, 0, 0.7); /* background colour when expanded with transparency */
 }
