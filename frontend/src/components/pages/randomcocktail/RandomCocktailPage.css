@@ -1,26 +1,63 @@
 .container {
-    display: flex !important;
-    justify-content: center;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    align-items: center;
-  }
-  
-  h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .card-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-  }
-  
-  .card-image {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  display: flex !important;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  align-items: center;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-container {
+  padding: 20px;
+}
+
+.card {
+  background-color: black; 
+  color: white; 
+  border: none; 
+  border-radius: 1rem;
+}
+
+.card-body {
+  color: white; 
+}
+
+.card-title, .card-text {
+  color: white; 
+}
+
+.card-image {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem; 
+}
+
+.random {
+  margin-top: 40px;
+}
+
+.card-body-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-random-cocktail-button,
+.get-another-cocktail-button {
+  background-color: wheat;
+  border: none;
+  color: black;
+  outline: none; /* no focus outline */
+}
+
+.save-random-cocktail-button:hover,
+.get-another-cocktail-button:hover {
+  background-color: #f5deb3;
+  color: black; 
+}

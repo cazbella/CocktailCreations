@@ -25,11 +25,32 @@ const RandomCocktail = () => {
       .catch(error => console.error('Error fetching cocktail:', error));
   };
 
+  //save cocktail to local storage
+
+  const saveRandomCocktail = () => {
+    if (cocktail) {
+      // get existing saved cocktails from local storage
+      const savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];
+      
+      // add new cocktail to existing list
+      savedCocktails.push(cocktail);
+      
+      // save updated list back to local storage
+      localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails));
+      
+      alert('Cocktail saved!');
+    } else {
+      alert('No cocktail to save.');
+    }
+  };
+  
+
+
   return (
     <div>
       <h1 className="text-center">Random Cocktail</h1>
       {/* bootstrap card */}
-      <div className="container fluid mb-4">
+      <div className="container fluid mb-4 random">
         <div className="card-container">
           {cocktail ? (
             <Card>
@@ -46,8 +67,10 @@ const RandomCocktail = () => {
                       <li key={key}>{cocktail[key]}</li>
                     ))}
                 </ul>
-                {/* button fetches and displays again if wanted by user */}
-                <Button variant="primary" onClick={fetchRandomCocktail}>Get Another Cocktail</Button>
+                <div className="card-body-buttons">
+                  <Button variant="primary" className='save-random-cocktail-button' onClick={saveRandomCocktail}>Save</Button>
+                  <Button variant="primary" className='get-another-cocktail-button' onClick={fetchRandomCocktail}>Get Another Cocktail</Button>
+                </div>
               </Card.Body>
             </Card>
           ) : (

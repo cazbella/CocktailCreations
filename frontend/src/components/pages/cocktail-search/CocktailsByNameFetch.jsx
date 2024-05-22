@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './CocktailsByNamePage.css'; 
 
-const CocktailsByNameFetch = ({ setError, onSelectCocktail }) => {
-  //state variables
-  //sets value to empty string initially
+
+const CocktailsByNameFetch = ({ setError, onSelectCocktail, setCocktails, cocktails }) => {
   const [cocktailName, setCocktailName] = useState('');
-  //empty array initially
-  const [cocktails, setCocktails] = useState([]);
-  //used to update loading state
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = event => {
     setCocktailName(event.target.value);
   };
 
-  // fetcjes from cocktails DB
   const fetchCocktailsByName = name => {
     setLoading(true);
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(name)}`)
@@ -35,18 +31,14 @@ const CocktailsByNameFetch = ({ setError, onSelectCocktail }) => {
       });
   };
 
-  //add error handling
   const handleFormSubmit = event => {
-    //stops page refreshing - default behaviour
-    event.preventDefault();
+    event.preventDefault(); // prevent default to keep list under card..
     const trimmedInput = cocktailName.trim();
     if (!trimmedInput) {
       setError("Please enter a cocktail name.");
       return;
     }
-    // removes special characters using REGEX (sortware)
     const sanitizedInput = trimmedInput.replace(/[^a-zA-Z0-9\s]/g, '');
-    // More error handling?
     fetchCocktailsByName(sanitizedInput);
   };
 
@@ -56,18 +48,20 @@ const CocktailsByNameFetch = ({ setError, onSelectCocktail }) => {
 
   return (
     <div>
-      <h2>Search Cocktails by Name</h2>
+      <h2 className='search-title'>Search Cocktails by Name</h2>
+      <p className='search-instructions'>Type the name or part of the name... then press search!</p>
       {loading && <p>Loading...</p>}
-      <form onSubmit={handleFormSubmit}>
+      <form className='cocktail-form' onSubmit={handleFormSubmit}>
         <input
           type="text"
-          placeholder="Enter cocktail name"
+          placeholder="Ingredient or name..."
           value={cocktailName}
           onChange={handleInputChange}
+          className="cocktail-input"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="cocktail-submit-button">Search</button>
       </form>
-      <ul>
+      <ul className='cocktail-list'>
         {cocktails.map(cocktail => (
           <li key={cocktail.idDrink}>
             <button onClick={() => handleSelectCocktail(cocktail)}>{cocktail.strDrink}</button>
@@ -79,6 +73,3 @@ const CocktailsByNameFetch = ({ setError, onSelectCocktail }) => {
 };
 
 export default CocktailsByNameFetch;
-
-
-//NEED TO ADD ERROR HANDLING HERE 

@@ -1,45 +1,80 @@
 import React, { useState } from 'react';
-import CocktailsByNameFetch from './CocktailsByNameFetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card, Button } from 'react-bootstrap';
+import CocktailsByNameFetch from './CocktailsByNameFetch';
+import './CocktailsByNamePage.css'; 
 
-import "./CocktailsByNamePage.css"
-
-// state to set cocktail
 const CocktailSearchPage = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
   const [error, setError] = useState('');
+  const [showCocktailList, setShowCocktailList] = useState(true);
+  const [cocktails, setCocktails] = useState([]);
 
   const handleSelectCocktail = cocktail => {
+    console.log('Selected Cocktail:', cocktail);
     setSelectedCocktail(cocktail);
+    setShowCocktailList(false);
   };
 
-  // parses jason to return and display wanted information from cocktailsdb
+  const handleGoBackToList = () => {
+    console.log('Going back to list');
+    setSelectedCocktail(null);
+    setShowCocktailList(true);
+  };
+
+  const handleSetCocktails = (newCocktails) => {
+    setCocktails(newCocktails);
+  };
+
   return (
-    <div>
-      <h1>Cocktails by Name Page</h1>
-      <CocktailsByNameFetch setError={setError} onSelectCocktail={handleSelectCocktail} />
-      {error && <p>Error: {error}</p>}
-      {selectedCocktail && (
+    <div className="container">
+      {showCocktailList ? (
+        <CocktailsByNameFetch 
+          setError={setError} 
+          onSelectCocktail={handleSelectCocktail}
+          setCocktails={handleSetCocktails}
+          cocktails={cocktails}
+        />
+      ) : (
         <div>
-          <h2>Selected Cocktail</h2>
-          <p>{selectedCocktail.strDrink}</p>
-          <img src={selectedCocktail.strDrinkThumb} alt={selectedCocktail.strD} />
-          <p>{selectedCocktail.strInstructions}</p>
-          <p>Ingredients:</p>
-          <ul>
-            {Object.keys(selectedCocktail)
-              .filter(key => key.startsWith('strIngredient') && selectedCocktail[key])
-              .map(key => (
-                <li key={key}>{selectedCocktail[key]}</li>
-              ))}
-          </ul>
+          <h1 className="text-center">Selected Cocktail</h1>
+          <div className="card-container">
+            <Button className="close-btn" onClick={handleGoBackToList}>X</Button>
+            {selectedCocktail && (
+              <Card className="card">
+                <h1 className='card-title'>{selectedCocktail.strDrink}</h1>
+                <Card.Img className='card-image' variant="top" src={selectedCocktail.strDrinkThumb} alt={selectedCocktail.strDrink} />
+                <Card.Body className='card-body'>
+                  <Card.Text>{selectedCocktail.strInstructions}</Card.Text>
+                  <Card.Text>Ingredients:</Card.Text>
+                  <ul className='ingredient-list'>
+                    {Object.keys(selectedCocktail)
+                      .filter(key => key.startsWith('strIngredient') && selectedCocktail[key])
+                      .map(key => (
+                        <li key={key}>{selectedCocktail[key]}</li>
+                      ))}
+                  </ul>
+                </Card.Body>
+              </Card>
+            )}
+          </div>
         </div>
       )}
+      {error && <p>Error: {error}</p>}
     </div>
   );
 };
 
 export default CocktailSearchPage;
+
+
+
+
+
+
+
+
+
 
 // selectedCocktail[key]- Accesses the value associated with the current key
 // key.startsWith('strIngredient') - Checks if the current key starts with the string 'strIngredient'

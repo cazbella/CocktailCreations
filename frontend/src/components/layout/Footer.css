@@ -1,19 +1,17 @@
 .custom-footer {
   position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
   width: 100%;
   z-index: 1000;
   border-radius: 1rem;
   height: 70px;
   padding: 10px 20px;
   margin-top: auto;
+  background-color: rgba(0, 0, 0, 0.9); 
 }
 
 .custom-footer .navbar-collapse {
   position: absolute;
-  bottom: 100%; /* position collapse menu above the navbar */
+  bottom: 100%; /*collapse menu above the navbar */
   right: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7); 
@@ -28,17 +26,22 @@
 
 .custom-footer .nav-link {
   color: beige !important;
-  padding: 10px 15px; /* Ensure padding is consistent */
+  padding: 10px 15px; 
 }
 
 .custom-footer .nav-link:hover {
   color: #FFA500;
 }
 
-/* .custom-footer .navbar-toggler {
-  margin-right: px; 
-} */
+@media (max-width: 991px) {
+  .custom-footer .navbar-collapse {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
 
-.custom-navbar .navbar-collapse.show {
-  background-color: rgba(0, 0, 0, 0.7); /* background colour when expanded with transparency */
+@media (min-width: 992px) {
+  .custom-footer .navbar-collapse {
+    position: static;
+    background-color: transparent;
+  }
 }
