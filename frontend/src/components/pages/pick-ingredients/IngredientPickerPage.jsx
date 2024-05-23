@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import IngredientPickerForm from './IngredientPickerForm';
 import './IngredientPicker.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const IngredientPickerPage = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [cocktailDetails, setCocktailDetails] = useState(null);
+  const [showIngredients, setShowIngredients] = useState(true); // whether to show ingredients or cocktails
 
   const handleSelectIngredient = (ingredients) => {
-    console.log('Selected ingredients in handleSelectIngredient YOYOYO:', ingredients);
+    console.log('Selected ingredients:', ingredients);
     setSelectedIngredients(ingredients);
   };
 
@@ -25,6 +26,7 @@ const IngredientPickerPage = () => {
       });
       const data = await response.json();
       setCocktails(data);
+      setShowIngredients(false); // Hides ingredients when button clicked
       console.log('Fetched cocktails:', data);
     } catch (error) {
       console.error('Error fetching cocktails:', error);
@@ -52,58 +54,72 @@ const IngredientPickerPage = () => {
     }
   };
 
+  const handleBack = () => {
+    setShowIngredients(true); // Show ingredients again when back is clicked by user
+    setCocktailDetails(null); // Clear selected cocktail details when button clicked and go back to list
+  };
 
   return (
     <div>
       <h1>Ingredient Picker</h1>
-      <IngredientPickerForm
-        onSelectIngredient={handleSelectIngredient}
-        onGetCocktails={handleGetCocktails}
-      />
-      <div>
-        <h2>Fetched Cocktails</h2>
-        <ul>
-          {cocktails.map((cocktail, index) => (
-            <li key={index}>
-              <button onClick={() => handleGetCocktailDetails(cocktail.name)}>
-                {cocktail.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-        {cocktailDetails && (
+      {showIngredients ? ( // Show ingredients or cocktails based on state (set ets)
+        <IngredientPickerForm
+          onSelectIngredient={handleSelectIngredient}
+          onGetCocktails={handleGetCocktails}
+          selectedIngredients={selectedIngredients}
+        />
+      ) : (
+        <div>
+          <button onClick={handleBack}>Back</button> {/* bck button */}
           <div>
-            <h3>Cocktail Details</h3>
-            <p>Instructions: {cocktailDetails.instructions.instructions}</p>
+            <h2>Fetched Cocktails</h2>
+            <ul className="cocktail-list">
+              {cocktails.map((cocktail, index) => (
+                <li key={index} className="cocktail-item">
+                  <button onClick={() => handleGetCocktailDetails(cocktail.name)}>
+                    {cocktail.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+      {cocktailDetails && (
+        <Card>
+          <Card.Body>
+            <Card.Title>Cocktail Details</Card.Title>
+            <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
+            <Card.Text>Ingredients:</Card.Text>
             <ul>
-              {Object.keys(cocktailDetails.ingredients).map(key => {
+              {Object.keys(cocktailDetails.ingredients).map((key, index) => {
                 if (key.startsWith('ingredient') && cocktailDetails.ingredients[key]) {
-                  return <li key={key}>{cocktailDetails.ingredients[key]}</li>;
+                  return <li key={index}>{cocktailDetails.ingredients[key]}</li>;
                 }
                 return null;
               })}
             </ul>
-
             {cocktailDetails.image_url && (
               <img
                 src={cocktailDetails.image_url.image_url}
                 alt="Cocktail"
                 onError={(e) => {
                   e.target.onerror = null; // stops infinite loop
-                  e.target.src = 'fallback-image-url.jpg'; // need to put one here 
+                  e.target.src = 'fallback-image-url.jpg'; // need to put one here
                 }}
               />
             )}
             {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>}
-          </div>
-        )}
-
-      </div>
-    </div>
-  );
+            </Card.Body>
+        </Card>
+      )}
+        </div>
+      );
 };
 
-export default IngredientPickerPage;
+      export default IngredientPickerPage;
+
+
 
 
 //Object.keys(cocktailDetails.ingredients) to get an array of all keys in the ingredients object.

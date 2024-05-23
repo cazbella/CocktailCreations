@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, onGetCocktailDetails }) => {
+const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngredients }) => {
   const [allIngredients, setAllIngredients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredIngredients, setFilteredIngredients] = useState([]);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   useEffect(() => {
     fetchIngredients();
@@ -13,12 +12,14 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, onGetCocktai
 
   const fetchIngredients = async () => {
     try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+      const response = await fetch('http://127.0.0.1:5000/ingredients'); //changes API to mine from cocktails db
       const data = await response.json();
-      if (data && data.drinks) {
-        const sortedIngredients = data.drinks.map(drink => drink.strIngredient1).sort();
-        setAllIngredients(sortedIngredients);
-        setFilteredIngredients(sortedIngredients);
+      console.log(data);
+      if (response.ok) {
+        setAllIngredients(data); 
+        setFilteredIngredients(data);
+      } else {
+        console.error('Error fetching ingredients:', data.error);
       }
     } catch (error) {
       console.error('Error fetching ingredients:', error);
@@ -37,15 +38,8 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, onGetCocktai
   const handleSelectIngredient = (ingredient) => {
     console.log('Ingredient selected:', ingredient);
     const updatedSelectedIngredients = [...selectedIngredients, ingredient];
-    setSelectedIngredients(updatedSelectedIngredients);
     onSelectIngredient(updatedSelectedIngredients);
     setSearchTerm('');
-  };
-
-  const handleGetCocktails = () => {
-    onGetCocktails(selectedIngredients);
-    // onGetCocktailDetails(cocktails);
-    //want it from list - originally had idea to get all possibles
   };
 
   return (
@@ -59,8 +53,8 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, onGetCocktai
         className="search-input"
       />
       <ul className="ingredient-list">
-        {filteredIngredients.map(ingredient => (
-          <li key={ingredient} className="ingredient-item">
+        {filteredIngredients.map((ingredient, index) => (
+          <li key={index} className="ingredient-item">
             <button onClick={() => handleSelectIngredient(ingredient)}>{ingredient}</button>
           </li>
         ))}
@@ -72,7 +66,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, onGetCocktai
             <li key={idx}>{ingredient}</li>
           ))}
         </ul>
-        <button onClick={handleGetCocktails}>Get Cocktails</button>
+        <button onClick={onGetCocktails}>Get Cocktails</button>
       </div>
     </div>
   );

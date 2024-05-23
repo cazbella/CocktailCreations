@@ -25,11 +25,12 @@ def hello_world():
 def get_ingredients():
     try:
         ingredients = get_ingredients_from_db()
-        return jsonify(ingredients), 200
+        return jsonify({"ingredients": ingredients}), 200
     except DBConnectionError as e:
         return jsonify({"error": str(e)}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
 
 @app.route("/cocktails", methods=['POST'])
 def get_cocktails():
