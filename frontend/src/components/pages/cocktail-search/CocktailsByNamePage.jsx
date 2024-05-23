@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button } from 'react-bootstrap';
 import CocktailsByNameFetch from './CocktailsByNameFetch';
-import './CocktailsByNamePage.css'; 
+import './CocktailsByNamePage.css';
 
 const CocktailSearchPage = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
@@ -29,8 +29,8 @@ const CocktailSearchPage = () => {
   return (
     <div className="container">
       {showCocktailList ? (
-        <CocktailsByNameFetch 
-          setError={setError} 
+        <CocktailsByNameFetch
+          setError={setError}
           onSelectCocktail={handleSelectCocktail}
           setCocktails={handleSetCocktails}
           cocktails={cocktails}
@@ -39,7 +39,6 @@ const CocktailSearchPage = () => {
         <div>
           <h1 className="text-center">Selected Cocktail</h1>
           <div className="card-container">
-            <Button className="close-btn" onClick={handleGoBackToList}>X</Button>
             {selectedCocktail && (
               <Card className="card">
                 <h1 className='card-title'>{selectedCocktail.strDrink}</h1>
@@ -54,6 +53,10 @@ const CocktailSearchPage = () => {
                         <li key={key}>{selectedCocktail[key]}</li>
                       ))}
                   </ul>
+                  <div className='card-body-buttons'>
+                    <Button variant="primary" className='save-searched-cocktail-button'>Save</Button>
+                    <Button className="close-btn" onClick={handleGoBackToList}>Back</Button>
+                  </div>
                 </Card.Body>
               </Card>
             )}

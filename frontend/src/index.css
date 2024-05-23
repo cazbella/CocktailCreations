@@ -1,21 +1,9 @@
-/* body {
-    margin-top: 1.5rem;
-    padding: 20px;
+body {
+    margin-top: 0.5rem;
+    background: linear-gradient(to right, rgb(244, 220, 176), rgb(246, 236, 219));
   }
   
-  .btn-primary {
-    border-color: black;
-  }
-  
-  .btn-primary.btn-lg {
-    color: white;
-    background: rgb(136, 92, 177);
-  }
-  
-  .btn-primary:hover {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  }
-   */
+
   
 
 

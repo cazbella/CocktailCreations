@@ -82,26 +82,12 @@
     border-radius: 5px;
     cursor: pointer;
     outline: black 0.5px solid;
+    margin-top: 10px;
   }
   
   .cocktail-submit-button:hover {
     background-color: #f5deb3;
     color: black;
-  }
-
-  .close-btn {
-    /* position: absolute; */
-    top: 10px;
-    right: 10px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .close-btn:hover {
@@ -141,4 +127,20 @@
 
 .cocktail-list li button:hover {
   text-decoration: underline;
+}
+
+.save-searched-cocktail-button,
+.close-btn {
+  background-color: wheat;
+  border: none;
+  color: black;
+  outline: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-random-cocktail-button:hover,
+.get-another-cocktail-button:hover {
+  background-color: #f5deb3;
+  color: black; 
 }

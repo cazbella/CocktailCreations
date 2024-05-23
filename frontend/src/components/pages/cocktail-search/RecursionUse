@@ -1,0 +1,58 @@
+//needed to recursively fetch data based on some condition, could use recursion. E.g., fetching related cocktails until a certain condition is met.
+
+const fetchRelatedCocktails = (cocktailId, depth = 0, maxDepth = 3) => {
+  if (depth > maxDepth) return;
+
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktailId}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Fetched cocktail ${depth}:`, data.drinks[0]);
+      if (data.drinks[0].relatedCocktailId) {
+        fetchRelatedCocktails(data.drinks[0].relatedCocktailId, depth + 1, maxDepth);
+      }
+    })
+    .catch(error => console.error('Error fetching cocktail:', error));
+};
+
+// Initial call would be 
+fetchRelatedCocktails('11007');
+
+//or if use a tree structure
+const renderCocktailCategoryTree = (category) => {
+    if (!category) return null;
+  
+    return (
+      <ul>
+        <li>{category.name}</li>
+        {category.subCategories && category.subCategories.map(subCategory => (
+          <li key={subCategory.name}>
+            {renderCocktailCategoryTree(subCategory)}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+  
+  // Usage
+  const cocktailCategories = {
+    name: 'All Cocktails',
+    subCategories: [
+      {
+        name: 'Vodka Cocktails',
+        subCategories: [
+          { name: 'Martini', subCategories: [] },
+          { name: 'Bloody Mary', subCategories: [] }
+        ]
+      },
+      {
+        name: 'Rum Cocktails',
+        subCategories: [
+          { name: 'Mojito', subCategories: [] },
+          { name: 'Daiquiri', subCategories: [] }
+        ]
+      }
+    ]
+  };
+  
+  renderCocktailCategoryTree(cocktailCategories);
+  

@@ -48,7 +48,7 @@ const RandomCocktail = () => {
 
   return (
     <div>
-      <h1 className="text-center">Random Cocktail</h1>
+      <h1 className="text-center title-random">Random Cocktail</h1>
       {/* bootstrap card */}
       <div className="container fluid mb-4 random">
         <div className="card-container">

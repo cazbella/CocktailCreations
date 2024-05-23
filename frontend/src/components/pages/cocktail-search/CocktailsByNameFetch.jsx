@@ -54,7 +54,7 @@ const CocktailsByNameFetch = ({ setError, onSelectCocktail, setCocktails, cockta
       <form className='cocktail-form' onSubmit={handleFormSubmit}>
         <input
           type="text"
-          placeholder="Ingredient or name..."
+          placeholder="Type here..."
           value={cocktailName}
           onChange={handleInputChange}
           className="cocktail-input"
