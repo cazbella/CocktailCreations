@@ -61,3 +61,20 @@ CREATE TABLE alcoholic_status (
     status VARCHAR(255),
     PRIMARY KEY (cocktail_id, status)
 );
+
+// to create saved cocktails TABLE
+
+CREATE TABLE saved_cocktails (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    instructions TEXT,
+    image_url VARCHAR(255),
+    video_url VARCHAR(255),
+    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+//When a user saves a cocktail, insert a new row 
+
+e.g INSERT INTO saved_cocktails (name, instructions, image_url, video_url)
+VALUES ('Margarita', 'Mix tequila, triple sec, lime juice, and salt. Serve over ice.', 'https://example.com/margarita.jpg', 'https://example.com/margarita.mp4');
+
