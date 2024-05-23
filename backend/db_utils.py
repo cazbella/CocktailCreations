@@ -16,6 +16,31 @@ def _connect_to_db(db_name: str):
     )
     return connection
 
+def get_ingredients_from_db():
+    db_connection = None
+    ingredients = []
+    try:
+        db_name = 'cocktaildb'
+        db_connection = _connect_to_db(db_name)
+        cursor = db_connection.cursor()
+        print("Connected to DB successfully")
+
+        query = "SELECT DISTINCT ingredient1 FROM ingredients UNION SELECT DISTINCT ingredient2 FROM ingredients UNION SELECT DISTINCT ingredient3 FROM ingredients UNION SELECT DISTINCT ingredient4 FROM ingredients UNION SELECT DISTINCT ingredient5 FROM ingredients UNION SELECT DISTINCT ingredient6 FROM ingredients UNION SELECT DISTINCT ingredient7 FROM ingredients UNION SELECT DISTINCT ingredient8 FROM ingredients UNION SELECT DISTINCT ingredient9 FROM ingredients UNION SELECT DISTINCT ingredient10 FROM ingredients UNION SELECT DISTINCT ingredient11 FROM ingredients UNION SELECT DISTINCT ingredient12 FROM ingredients UNION SELECT DISTINCT ingredient13 FROM ingredients UNION SELECT DISTINCT ingredient14 FROM ingredients UNION SELECT DISTINCT ingredient15 FROM ingredients ORDER BY ingredient1;"
+        cursor.execute(query)
+        results = cursor.fetchall()
+
+        ingredients = [row[0] for row in results if row[0]]  # filter out None values
+        print("Fetched ingredients:", ingredients)
+
+    except Exception as e:
+        raise DBConnectionError(f"Failed to read from database: {e}")
+    finally:
+        if db_connection:
+            db_connection.close()
+            print("DB connection closed")
+
+    return ingredients
+
 def show_cocktails_from_picked_ingredients(selected_ingredients):
     if len(selected_ingredients) > 15:
         raise ValueError("A maximum of 15 ingredients can be selected")

@@ -12,7 +12,7 @@
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details, DBConnectionError
+from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details, get_ingredients_from_db, DBConnectionError
 
 app = Flask(__name__)
 CORS(app)
@@ -20,6 +20,16 @@ CORS(app)
 @app.route("/")
 def hello_world():
     return "Hello world"
+
+@app.route('/ingredients', methods=['GET'])
+def get_ingredients():
+    try:
+        ingredients = get_ingredients_from_db()
+        return jsonify(ingredients), 200
+    except DBConnectionError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/cocktails", methods=['POST'])
 def get_cocktails():
