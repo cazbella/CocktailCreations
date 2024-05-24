@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Modal } from 'react-bootstrap';
 import IngredientPickerForm from './IngredientPickerForm';
 import './IngredientPicker.css';
 
@@ -8,6 +8,7 @@ const IngredientPickerPage = () => {
   const [cocktails, setCocktails] = useState([]);
   const [cocktailDetails, setCocktailDetails] = useState(null);
   const [showIngredients, setShowIngredients] = useState(true); // whether to show ingredients or cocktails
+  const [showNoCocktailsModal, setShowNoCocktailsModal] = useState(false);
 
   const handleSelectIngredient = (ingredients) => {
     console.log('Selected ingredients:', ingredients);
@@ -25,8 +26,15 @@ const IngredientPickerPage = () => {
         body: JSON.stringify({ ingredients: selectedIngredients })
       });
       const data = await response.json();
-      setCocktails(data);
-      setShowIngredients(false); // Hides ingredients when button clicked
+
+      if (Array.isArray(data) && data.length > 0) {
+        setCocktails(data);
+        setShowIngredients(false); // Hides ingredients when button clicked
+      } else {
+        setCocktails([]);
+        setShowNoCocktailsModal(true);
+      }
+
       console.log('Fetched cocktails:', data);
     } catch (error) {
       console.error('Error fetching cocktails:', error);
@@ -59,15 +67,27 @@ const IngredientPickerPage = () => {
     setCocktailDetails(null); // Clear selected cocktail details when button clicked and go back to list
   };
 
+  const handleCloseNoCocktailsModal = () => {
+    setShowNoCocktailsModal(false);
+    setShowIngredients(true);
+  };
+
+  const handleClearIngredients = () => {
+    setSelectedIngredients([]);
+  };
+
   return (
     <div>
       <h1>Ingredient Picker</h1>
       {showIngredients ? ( // Show ingredients or cocktails based on state (set ets)
-        <IngredientPickerForm
-          onSelectIngredient={handleSelectIngredient}
-          onGetCocktails={handleGetCocktails}
-          selectedIngredients={selectedIngredients}
-        />
+        <>
+          <IngredientPickerForm
+            onSelectIngredient={handleSelectIngredient}
+            onGetCocktails={handleGetCocktails}
+            selectedIngredients={selectedIngredients}
+            onClearIngredients={handleClearIngredients}
+          />
+        </>
       ) : (
         <div>
           <button onClick={handleBack}>Back</button> {/* bck button */}
@@ -110,14 +130,25 @@ const IngredientPickerPage = () => {
               />
             )}
             {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>}
-            </Card.Body>
+          </Card.Body>
         </Card>
       )}
-        </div>
-      );
+      <Modal show={showNoCocktailsModal} onHide={handleCloseNoCocktailsModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>No Cocktails Available</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>No cocktails available, please pick another ingredient.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseNoCocktailsModal}>
+            Back
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 };
 
-      export default IngredientPickerPage;
+export default IngredientPickerPage;
 
 
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './IngredientPicker.css'; // Import your CSS file
 
-const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngredients }) => {
+const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngredients, onClearIngredients }) => {
   const [allIngredients, setAllIngredients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredIngredients, setFilteredIngredients] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchIngredients();
@@ -12,12 +15,17 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
 
   const fetchIngredients = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/ingredients'); //changes API to mine from cocktails db
+      const response = await fetch('http://127.0.0.1:5000/ingredients');
       const data = await response.json();
-      console.log(data);
+      console.log('Fetched data:', data);
+
       if (response.ok) {
-        setAllIngredients(data); 
-        setFilteredIngredients(data);
+        if (data && Array.isArray(data.ingredients)) {
+          setAllIngredients(data.ingredients);
+          setFilteredIngredients(data.ingredients);
+        } else {
+          console.error('Fetched data is not in the expected format:', data);
+        }
       } else {
         console.error('Error fetching ingredients:', data.error);
       }
@@ -29,10 +37,14 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
   const handleSearch = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = allIngredients.filter(ingredient =>
-      ingredient.toLowerCase().includes(term)
-    );
-    setFilteredIngredients(filtered);
+    if (Array.isArray(allIngredients)) {
+      const filtered = allIngredients.filter(ingredient =>
+        ingredient.toLowerCase().includes(term)
+      );
+      setFilteredIngredients(filtered);
+    } else {
+      console.error('allIngredients is not an array:', allIngredients);
+    }
   };
 
   const handleSelectIngredient = (ingredient) => {
@@ -41,6 +53,13 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
     onSelectIngredient(updatedSelectedIngredients);
     setSearchTerm('');
   };
+
+  const handleNoCocktailsAvailable = () => {
+    setShowModal(true);
+    console.log('No cocktails available');
+  };
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <div className="ingredient-picker-container">
@@ -53,9 +72,9 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
         className="search-input"
       />
       <ul className="ingredient-list">
-        {filteredIngredients.map((ingredient, index) => (
+        {Array.isArray(filteredIngredients) && filteredIngredients.map((ingredient, index) => (
           <li key={index} className="ingredient-item">
-            <button onClick={() => handleSelectIngredient(ingredient)}>{ingredient}</button>
+            <button onClick={() => handleSelectIngredient(ingredient)} className="ingredient-button">{ingredient}</button>
           </li>
         ))}
       </ul>
@@ -66,8 +85,24 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
             <li key={idx}>{ingredient}</li>
           ))}
         </ul>
-        <button onClick={onGetCocktails}>Get Cocktails</button>
+        <Button onClick={onGetCocktails} className="get-another-cocktail-button">Get Cocktails</Button>
+        <Button variant="danger" onClick={onClearIngredients} className="clear-ingredients-button">Clear Ingredients</Button>
       </div>
+
+      {/* Modal */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>No Cocktails Available</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          No cocktails available, please pick another ingredient.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Back
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
