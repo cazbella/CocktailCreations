@@ -90,9 +90,8 @@ const IngredientPickerPage = () => {
         </>
       ) : (
         <div>
-          <button onClick={handleBack}>Back</button> {/* bck button */}
+          <button className='back' onClick={handleBack}>Back</button> {/* bck button */}
           <div>
-            <h2>Fetched Cocktails</h2>
             <ul className="cocktail-list">
               {cocktails.map((cocktail, index) => (
                 <li key={index} className="cocktail-item">
@@ -108,7 +107,7 @@ const IngredientPickerPage = () => {
       {cocktailDetails && (
         <Card>
           <Card.Body>
-            <Card.Title>Cocktail Details</Card.Title>
+            <Card.Title>{hi}</Card.Title>
             <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
             <Card.Text>Ingredients:</Card.Text>
             <ul>
@@ -129,7 +128,7 @@ const IngredientPickerPage = () => {
                 }}
               />
             )}
-            {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>}
+            {/* {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>} */}
           </Card.Body>
         </Card>
       )}

@@ -1,9 +1,9 @@
+// IngredientPickerForm.jsx
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './IngredientPicker.css'; // Import your CSS file
 
-const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngredients, onClearIngredients }) => {
+const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngredients }) => {
   const [allIngredients, setAllIngredients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredIngredients, setFilteredIngredients] = useState([]);
@@ -74,19 +74,21 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
       <ul className="ingredient-list">
         {Array.isArray(filteredIngredients) && filteredIngredients.map((ingredient, index) => (
           <li key={index} className="ingredient-item">
-            <button onClick={() => handleSelectIngredient(ingredient)} className="ingredient-button">{ingredient}</button>
+            <button onClick={() => handleSelectIngredient(ingredient)}>{ingredient}</button>
           </li>
         ))}
       </ul>
       <div className="selected-ingredients-container">
-        <h3>Selected Ingredients:</h3>
+        <h3 className=''>Selected Ingredients:</h3>
         <ul className="selected-ingredients-list">
           {selectedIngredients.map((ingredient, idx) => (
             <li key={idx}>{ingredient}</li>
           ))}
         </ul>
-        <Button onClick={onGetCocktails} className="get-another-cocktail-button">Get Cocktails</Button>
-        <Button variant="danger" onClick={onClearIngredients} className="clear-ingredients-button">Clear Ingredients</Button>
+        <div className="selected-container-buttons">
+          <button className="clear-ingredients-button" onClick={() => onSelectIngredient([])}>Clear Ingredients</button>
+          <button className="get-another-cocktail-button" onClick={onGetCocktails}>Get Cocktails</button>
+        </div>
       </div>
 
       {/* Modal */}
