@@ -106,31 +106,28 @@ const IngredientPickerPage = () => {
       )}
       {cocktailDetails && (
         <Card>
-          <Card.Body>
-            <Card.Title>Cocktail Details</Card.Title>
-            <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
-            <Card.Text>Ingredients:</Card.Text>
-            <ul>
-              {Object.keys(cocktailDetails.ingredients).map((key, index) => {
-                if (key.startsWith('ingredient') && cocktailDetails.ingredients[key]) {
-                  return <li key={index}>{cocktailDetails.ingredients[key]}</li>;
-                }
-                return null;
-              })}
-            </ul>
-            {cocktailDetails.image_url && (
-              <img
-                src={cocktailDetails.image_url.image_url}
-                alt="Cocktail"
-                onError={(e) => {
-                  e.target.onerror = null; // stops infinite loop
-                  e.target.src = 'fallback-image-url.jpg'; // need to put one here
-                }}
-              />
-            )}
-            {/* {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>} */}
-          </Card.Body>
-        </Card>
+        <Card.Body>
+          <Card.Title>{cocktailDetails.cocktail_name}</Card.Title>
+          <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
+          <Card.Text>Ingredients:</Card.Text>
+          <ul>
+            {cocktailDetails.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+          {cocktailDetails.image_url && (
+            <img
+              src={cocktailDetails.image_url.image_url}
+              alt="Cocktail"
+              onError={(e) => {
+                e.target.onerror = null; // stops infinite loop
+                e.target.src = 'fallback-image-url.jpg'; // need to put one here
+              }}
+            />
+          )}
+          {/* {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>} */}
+        </Card.Body>
+      </Card>
       )}
       <Modal show={showNoCocktailsModal} onHide={handleCloseNoCocktailsModal}>
         <Modal.Header closeButton>

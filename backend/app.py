@@ -1,4 +1,6 @@
-# # MUST DO - Run the server in your terminal using Flask command: choose the one that works python3 -m flask --app build_api run --debug OR flask --app build_api run --debug
+# # MUST DO - Run the server in your terminal using Flask command: choose the one that works
+# FLASK_APP=app.py flask run
+# OR python3 -m flask --app build_api run --debug OR flask --app build_api run --debug
 
 # python3 app.py
 

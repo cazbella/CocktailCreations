@@ -79,7 +79,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
         ))}
       </ul>
       <div className="selected-ingredients-container">
-        <h3 className=''>Selected Ingredients:</h3>
+        <h3 className='selected-title'>Selected Ingredients:</h3>
         <ul className="selected-ingredients-list">
           {selectedIngredients.map((ingredient, idx) => (
             <li key={idx}>{ingredient}</li>

@@ -94,9 +94,38 @@ def get_cocktail_details(cocktail_name):
         cursor = db_connection.cursor(dictionary=True)
         print("Connected to DB successfully")
         
-        # Fetch ingredients
+        # Fetch cocktail name
+        query_cocktail_name = """
+        SELECT name FROM cocktail_names cn
+        WHERE cn.name = %s;
+        """
+        cursor.execute(query_cocktail_name, (cocktail_name,))
+        cocktail_name_result = cursor.fetchone()
+        
+        if cocktail_name_result:
+            details['cocktail_name'] = cocktail_name_result['name']
+        else:
+            raise ValueError("Cocktail not found in the database.")
+
+        # Fetch ingredients based on cocktail name
         query_ingredients = """
-        SELECT * FROM ingredients ing
+        SELECT 
+            ing.ingredient1,
+            ing.ingredient2,
+            ing.ingredient3,
+            ing.ingredient4,
+            ing.ingredient5,
+            ing.ingredient6,
+            ing.ingredient7,
+            ing.ingredient8,
+            ing.ingredient9,
+            ing.ingredient10,
+            ing.ingredient11,
+            ing.ingredient12,
+            ing.ingredient13,
+            ing.ingredient14,
+            ing.ingredient15
+        FROM ingredients ing
         JOIN cocktail_names cn ON cn.id = ing.cocktail_id
         WHERE cn.name = %s;
         """
@@ -105,8 +134,8 @@ def get_cocktail_details(cocktail_name):
 
         # Process ingredients
         ingredients = []
-        for key, value in ingredient_row.items():
-            if key.startswith('ingredient') and value is not None:
+        for value in ingredient_row.values():
+            if value is not None:
                 ingredients.append(value)
 
         # Now, 'ingredients' contains all the ingredients as a list
@@ -151,6 +180,8 @@ def get_cocktail_details(cocktail_name):
             print("DB connection closed")
 
     return details
+
+
 
 
 """fetch('http://127.0.0.1:5000/cocktails', {
