@@ -107,7 +107,7 @@ const IngredientPickerPage = () => {
       {cocktailDetails && (
         <Card>
           <Card.Body>
-            <Card.Title>{hi}</Card.Title>
+            <Card.Title>Cocktail Details</Card.Title>
             <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
             <Card.Text>Ingredients:</Card.Text>
             <ul>
