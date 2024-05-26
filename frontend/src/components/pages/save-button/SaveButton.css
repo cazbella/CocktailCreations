@@ -1,0 +1,11 @@
+/* .card-body-buttons {
+    display: flex;
+    justify-content: space-between;
+  } */
+  
+  .save-button {
+    background-color: wheat;
+    border: none;
+    color: black;
+    outline: none; /* no focus outline */
+  }

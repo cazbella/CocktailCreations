@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal } from 'react-bootstrap';
 import IngredientPickerForm from './IngredientPickerForm';
 import './IngredientPicker.css';
+import SaveButton from '../save-button/SaveButton';
 
 const IngredientPickerPage = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
@@ -140,6 +141,7 @@ const IngredientPickerPage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <SaveButton/>
     </div>
   );
 };
