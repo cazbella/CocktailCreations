@@ -4,15 +4,22 @@ import './SaveButton.css';
 
 const SaveButton = ({ cocktail }) => {
     const saveCocktailName = async () => {
-        // need to determine the cocktail name based on the format because of different APIs
+        if (!cocktail) {
+            console.error("No cocktail object provided.");
+            alert("No cocktail to save.");
+            return;
+        }
+
+        // Determine the cocktail name based on the format
         const cocktailName = cocktail.strDrink || cocktail.cocktail_name;
 
-        console.log("Cocktail name to save:", cocktailName); 
-
         if (!cocktailName) {
+            console.error("No cocktail name available.");
             alert("No cocktail name available to save.");
             return;
         }
+
+        console.log("Cocktail name to save:", cocktailName); // Debug log
 
         try {
             const response = await fetch('http://localhost:5000/save_cocktail_name', {

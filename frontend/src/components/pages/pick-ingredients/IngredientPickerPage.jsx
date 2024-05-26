@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal } from 'react-bootstrap';
 import IngredientPickerForm from './IngredientPickerForm';
 import './IngredientPicker.css';
+import '../save-button/SaveButton.css';
 import SaveButton from '../save-button/SaveButton';
 
 const IngredientPickerPage = () => {
@@ -91,7 +92,7 @@ const IngredientPickerPage = () => {
         </>
       ) : (
         <div>
-          <button className='back' onClick={handleBack}>Back</button> {/* bck button */}
+          <button className='back' onClick={handleBack}>Back</button> {/* back button */}
           <div>
             <ul className="cocktail-list">
               {cocktails.map((cocktail, index) => (
@@ -107,28 +108,32 @@ const IngredientPickerPage = () => {
       )}
       {cocktailDetails && (
         <Card>
-        <Card.Body>
-          <Card.Title>{cocktailDetails.cocktail_name}</Card.Title>
-          <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
-          <Card.Text>Ingredients:</Card.Text>
-          <ul>
-            {cocktailDetails.ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
-            ))}
-          </ul>
-          {cocktailDetails.image_url && (
-            <img
-              src={cocktailDetails.image_url.image_url}
-              alt="Cocktail"
-              onError={(e) => {
-                e.target.onerror = null; // stops infinite loop
-                e.target.src = 'fallback-image-url.jpg'; // need to put one here
-              }}
-            />
-          )}
-          {/* {cocktailDetails.video_url && <a href={cocktailDetails.video_url.video_url}>Video</a>} */}
-        </Card.Body>
-      </Card>
+          <Card.Body>
+            <Card.Title className='title-picked-cocktail'>{cocktailDetails.cocktail_name}</Card.Title>
+            <Card.Text>Ingredients:</Card.Text>
+            <ul>
+              {cocktailDetails.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+            <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
+           
+            {cocktailDetails.image_url && (
+              <img className='image'
+                src={cocktailDetails.image_url.image_url}
+                alt="Cocktail"
+                onError={(e) => {
+                  e.target.onerror = null; // stops infinite loop
+                  e.target.src = 'fallback-image-url.jpg'; // need to put one here
+                }}
+              />
+            )}
+            <div className="card-body-buttons">
+              <SaveButton cocktail={cocktailDetails} />
+              <Button className='back-bottom' variant="secondary" onClick={handleBack}>Back</Button>
+            </div>
+          </Card.Body>
+        </Card>
       )}
       <Modal show={showNoCocktailsModal} onHide={handleCloseNoCocktailsModal}>
         <Modal.Header closeButton>
@@ -141,12 +146,12 @@ const IngredientPickerPage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <SaveButton/>
     </div>
   );
 };
 
 export default IngredientPickerPage;
+
 
 
 

@@ -1,72 +1,83 @@
 h1 {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 /* container for selected ingredients */
 .selected-ingredients-container {
-    position: fixed;
-    right: 0;
-    background-color: black;
-    padding: 10px;
-    margin-top: 100px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    border-radius: 0.5rem;
-  }
+  position: fixed;
+  right: 0;
+  background-color: black;
+  padding: 10px;
+  margin-top: 100px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 0.5rem;
+}
 
-  .selected-title {
-    color: white;
-    margin-top: 10px;
-  }
-  
-  /* list of selected ingredients */
-  .selected-ingredients-list {
-    list-style-type: none;
-    padding: 10px;
-    margin-top: 35px;
-    color: white;
-  }
-  
-  /* container for ingredient picker */
-  .ingredient-picker-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  /* individual ingredient item */
-  .ingredient-item {
-    margin-bottom: 10px;
-    width: calc(50% - 10px); /* 2items per row */
-  }
-  
-  .search-input {
-    width: 80%;
-    margin-bottom: 10px;
-    border-radius: 0.5rem;
-  }
+.selected-title {
+  color: white;
+  margin-top: 10px;
+}
+
+/* list of selected ingredients */
+.selected-ingredients-list {
+  list-style-type: none;
+  padding: 10px;
+  margin-top: 35px;
+  color: white;
+}
+
+/* container for ingredient picker */
+.ingredient-picker-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* individual ingredient item */
+.ingredient-item {
+  margin-bottom: 10px;
+  width: calc(50% - 10px);
+  /* 2items per row */
+}
+
+.search-input {
+  width: 80%;
+  margin-bottom: 10px;
+  border-radius: 0.5rem;
+}
 
 
 .ingredient-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-    grid-gap: 5px; /* gap between grid items */
-  }
-  
-  .ingredient-item {
-    list-style: none; /* removes bullet points */
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns with equal width */
+  grid-gap: 5px;
+  /* gap between grid items */
+}
 
-  .ingredient-item button, .back {
-    border-radius: 1rem; 
-    /* round corners */
-    border: 1px solid black;
-    color: white;
-    background-color: black;
-    border: none;
-    padding: 10px;
-    outline: none; /* no focus outline */
+.ingredient-item {
+  list-style: none;
+  /* removes bullet points */
+}
+
+.image {
+  margin-bottom: 10px;
+  border-radius: 1rem;
+}
+
+.ingredient-item button,
+.back {
+  border-radius: 1rem;
+  /* round corners */
+  border: 1px solid black;
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 10px;
+  outline: none;
+  /* no focus outline */
 }
 
 .selected-container-buttons {
@@ -75,32 +86,40 @@ h1 {
   margin-bottom: 10px;
 }
 
-.clear-ingredients-button, .get-another-cocktail-button {
+.clear-ingredients-button,
+.get-another-cocktail-button,
+.back-bottom {
   background-color: wheat;
   border: none;
   color: black;
   border: black solid 0.5px;
-  outline: none; 
+  outline: none;
   border-radius: 0.5rem;
+}
+
+.title-picked-cocktail {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 
 /* to move selected ingredients to bottom right on smaller screens */
 
 @media (max-width: 768px) {
-    .selected-ingredients-container {
-      position: fixed;
-      bottom: 0 !important;
-      right: 0;
-      width: 200px; 
-      max-height: 200px;
-      overflow-y: auto; 
-      background-color: lightgray; 
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid black;
-      border-radius: 10px;
-      z-index: 9999; /* makes it above other content */
-    }
+  .selected-ingredients-container {
+    position: fixed;
+    bottom: 0 !important;
+    right: 0;
+    width: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: lightgray;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 9999;
+    /* makes it above other content */
   }
-  
+}
