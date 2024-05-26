@@ -1,3 +1,7 @@
+// This is code that creates the database. In order to populate the database please use cocktail_data_utils.py 
+
+********************************************
+
 CREATE DATABASE cocktailsdb
 
 USE cocktailsdb
@@ -69,5 +73,125 @@ CREATE TABLE saved_cocktails (
     name VARCHAR(255),
 );
 
-//When a user saves a cocktail, insert a new row 
+**********************************************
+
+*****Below are the queries run to test the queries that were used in db_utils. *********
+
+
+
+-- SELECT * FROM cocktail_names
+-- SELECT * FROM alcoholic_status
+-- SELECT * FROM glass_type
+-- SELECT * FROM drinks_information
+-- SELECT * FROM ingredients
+
+-- SELECT DISTINCT c.name
+-- FROM cocktail_names c
+-- JOIN ingredients i ON c.id = i.cocktail_id
+-- WHERE i.ingredient1 IN ('vodka', 'orange juice')
+--    OR i.ingredient2 IN ('vodka', 'orange juice')
+--    OR i.ingredient3 IN ('vodka', 'orange juice')
+--    -- ... (up to 11 conditions)
+-- ORDER BY c.name;
+
+-- SELECT c.name
+-- FROM cocktail_names c
+-- JOIN ingredients i ON c.id = i.cocktail_id
+-- WHERE 'vodka' IN (i.ingredient1, i.ingredient2, i.ingredient3, i.ingredient4, i.ingredient5, 
+--                   i.ingredient6, i.ingredient7, i.ingredient8, i.ingredient9, i.ingredient10, 
+--                   i.ingredient11, i.ingredient12, i.ingredient13, i.ingredient14, i.ingredient15)
+--   AND 'orange juice' IN (i.ingredient1, i.ingredient2, i.ingredient3, i.ingredient4, i.ingredient5, 
+--                          i.ingredient6, i.ingredient7, i.ingredient8, i.ingredient9, i.ingredient10, 
+--                          i.ingredient11, i.ingredient12, i.ingredient13, i.ingredient14, i.ingredient15)
+-- ORDER BY c.name;
+
+
+-- SELECT cn.name
+-- FROM cocktail_names cn
+-- JOIN ingredients ing ON cn.id = ing.cocktail_id
+-- WHERE ('vodka' IN (ing.ingredient1, ing.ingredient2, ing.ingredient3, ing.ingredient4, ing.ingredient5, 
+--                    ing.ingredient6, ing.ingredient7, ing.ingredient8, ing.ingredient9, ing.ingredient10, 
+--                    ing.ingredient11, ing.ingredient12, ing.ingredient13, ing.ingredient14, ing.ingredient15)
+--    AND 'orange juice' IN (ing.ingredient1, ing.ingredient2, ing.ingredient3, ing.ingredient4, ing.ingredient5, 
+--                           ing.ingredient6, ing.ingredient7, ing.ingredient8, ing.ingredient9, ing.ingredient10, 
+--                           ing.ingredient11, ing.ingredient12, ing.ingredient13, ing.ingredient14, ing.ingredient15)
+-- 	AND 'peach schnapps' IN (ing.ingredient1, ing.ingredient2, ing.ingredient3, ing.ingredient4, ing.ingredient5, 
+--                           ing.ingredient6, ing.ingredient7, ing.ingredient8, ing.ingredient9, ing.ingredient10, 
+--                           ing.ingredient11, ing.ingredient12, ing.ingredient13, ing.ingredient14, ing.ingredient15)) 
+-- GROUP BY cn.name
+-- ORDER BY cn.name;
+
+-- SELECT *
+-- FROM cocktail_names
+-- WHERE name = 'White Russian';
+
+-- SELECT COUNT(DISTINCT ingredient) AS total_ingredients
+-- FROM (
+--     SELECT ingredient1 AS ingredient FROM ingredients WHERE ingredient1 IS NOT NULL AND ingredient1 != ''
+--     UNION
+--     SELECT ingredient2 FROM ingredients WHERE ingredient2 IS NOT NULL AND ingredient2 != ''
+--     UNION
+--     SELECT ingredient3 FROM ingredients WHERE ingredient3 IS NOT NULL AND ingredient3 != ''
+--     UNION
+--     SELECT ingredient4 FROM ingredients WHERE ingredient4 IS NOT NULL AND ingredient4 != ''
+--     UNION
+--     SELECT ingredient5 FROM ingredients WHERE ingredient5 IS NOT NULL AND ingredient5 != ''
+--     UNION
+--     SELECT ingredient6 FROM ingredients WHERE ingredient6 IS NOT NULL AND ingredient6 != ''
+--     UNION
+--     SELECT ingredient7 FROM ingredients WHERE ingredient7 IS NOT NULL AND ingredient7 != ''
+--     UNION
+--     SELECT ingredient8 FROM ingredients WHERE ingredient8 IS NOT NULL AND ingredient8 != ''
+--     UNION
+--     SELECT ingredient9 FROM ingredients WHERE ingredient9 IS NOT NULL AND ingredient9 != ''
+--     UNION
+--     SELECT ingredient10 FROM ingredients WHERE ingredient10 IS NOT NULL AND ingredient10 != ''
+--     UNION
+--     SELECT ingredient11 FROM ingredients WHERE ingredient11 IS NOT NULL AND ingredient11 != ''
+--     UNION
+--     SELECT ingredient12 FROM ingredients WHERE ingredient12 IS NOT NULL AND ingredient12 != ''
+--     UNION
+--     SELECT ingredient13 FROM ingredients WHERE ingredient13 IS NOT NULL AND ingredient13 != ''
+--     UNION
+--     SELECT ingredient14 FROM ingredients WHERE ingredient14 IS NOT NULL AND ingredient14 != ''
+--     UNION
+--     SELECT ingredient15 FROM ingredients WHERE ingredient15 IS NOT NULL AND ingredient15 != ''
+-- ) AS all_ingredients;
+
+-- SELECT 
+--     cocktail_names.name AS CocktailName,
+--     ingredients.ingredient1,
+--     ingredients.ingredient2,
+--     ingredients.ingredient3,
+--     ingredients.ingredient4,
+--     ingredients.ingredient5,
+--     ingredients.ingredient6,
+--     ingredients.ingredient7,
+--     ingredients.ingredient8,
+--     ingredients.ingredient9,
+--     ingredients.ingredient10,
+--     ingredients.ingredient11,
+--     ingredients.ingredient12,
+--     ingredients.ingredient13,
+--     ingredients.ingredient14,
+--     ingredients.ingredient15
+-- FROM 
+--     cocktail_names
+-- JOIN 
+--     ingredients ON cocktail_names.id = ingredients.cocktail_id
+-- WHERE 
+--     cocktail_names.name = 'broadside';
+
+-- CREATE TABLE saved_cocktail_names (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL
+-- );
+
+-- INSERT INTO saved_cocktail_names (name) VALUES ('White Russian');
+
+-- SELECT * FROM saved_cocktail_names WHERE name = 'White Russian';
+
+SELECT * FROM saved_cocktail_names;
+-- DELETE FROM saved_cocktail_names;
+
 

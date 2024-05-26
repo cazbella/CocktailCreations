@@ -1,3 +1,5 @@
+# this file shows how utils could be OOP. I have tried to implement this but i need to look more into the errors. 
+
 import mysql.connector
 from config import HOST, USER, PASSWORD
 

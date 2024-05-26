@@ -1,4 +1,4 @@
-# this is a test file
+# this is a test file that i used to test the fetch in python before writing the other tests and progressing to the front end. 
 
 import requests
 

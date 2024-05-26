@@ -1,4 +1,4 @@
-# this is just a test file
+# this was just a starting point test file test file
 
 # This code works to use the created database and the current db_utils and app.py to return a cocktail/s with only the selected ingredients. Currently the ingredient name needs to be exact but this should be ok as the user is ticking the boxes to select incredients. This should eliminate any need for user input error handling. need to put a filter on the list
 

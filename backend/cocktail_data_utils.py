@@ -3,6 +3,7 @@ import mysql.connector
 from config import HOST, USER, PASSWORD
 
 # this populates the tables with data from the mySQL.txt it is not used by the frontend,. 
+# I wanted to use the data in the cocktailsdb online to populate this database so i could use both one i created and the online database to satisfy both of these requirements. However, the online APIs don't let you get specific ingredients (without paying) or all the cocktails. They do, However, allow you to get cocktails by letter. So I had the idea to loop trhough all the letters and get the data that way!
 
 db_name = "cocktaildb"
 
@@ -29,12 +30,14 @@ class CocktailDB:
 
     def fetch_all_cocktails(self):
         all_cocktails = []
+        # the loop is here 
         for letter in "abcdefghijklmnopqrstuvwxyz":
             cocktails = self.fetch_cocktails_by_letter(letter)
             if cocktails:
                 all_cocktails.extend(cocktails)
         return all_cocktails
 
+    # inserts into the database here 
     def insert_cocktail_data(self, data):
         for cocktail in data:
             print(f"Inserting data for cocktail: {cocktail['strDrink']}")
@@ -87,7 +90,7 @@ class CocktailDB:
         self.connection.close()
 
 
-# Usage example
+# usage example
 if __name__ == "__main__":
     db = CocktailDB(db_name)
     all_cocktails = db.fetch_all_cocktails()
