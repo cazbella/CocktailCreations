@@ -138,8 +138,6 @@ def get_cocktail_details(cocktail_name):
             if value is not None:
                 ingredients.append(value)
 
-        # Now 'ingredients' contains all the ingredients as a list
-
         # Fetch instructions
         query_instructions = """
         SELECT instructions FROM instructions inst
@@ -189,7 +187,7 @@ def save_cocktail_name(cocktail_name):
         cursor = db_connection.cursor()
         print("Connected to DB successfully")
 
-        # Inserts cocktail name into the newcocktail_names table
+        # Inserts cocktail name into cocktail_names table
         query = "INSERT INTO saved_cocktail_names (name) VALUES (%s)"
         cursor.execute(query, (cocktail_name,))
         db_connection.commit()
@@ -204,6 +202,33 @@ def save_cocktail_name(cocktail_name):
             db_connection.close()
             print("DB connection closed")
 
+
+def get_saved_cocktail_names_from_db():
+    db_connection = None
+    cocktail_names = []
+    try:
+        db_name = 'cocktaildb' 
+        db_connection = _connect_to_db(db_name)
+        cursor = db_connection.cursor()
+        print("Connected to DB successfully")
+
+        query = "SELECT DISTINCT name FROM saved_cocktail_names;"
+        cursor.execute(query)
+        results = cursor.fetchall()
+
+        cocktail_names = [row[0] for row in results if row[0]]
+        # print("Fetched saved cocktail names:", cocktail_names)
+
+    except Exception as e:
+        raise DBConnectionError(f"Failed to read from database: {e}")
+    finally:
+        if db_connection:
+            db_connection.close()
+            print("DB connection closed")
+
+    return cocktail_names
+
+
 def delete_all_saved_cocktail_names():
     db_connection = None
     try:
@@ -212,7 +237,7 @@ def delete_all_saved_cocktail_names():
         cursor = db_connection.cursor()
         print("Connected to DB successfully")
 
-        # Deletes all entries from the saved_cocktail_names table
+        # deletes all entries from the saved_cocktail_names table
         query = "DELETE FROM saved_cocktail_names"
         cursor.execute(query)
         db_connection.commit()

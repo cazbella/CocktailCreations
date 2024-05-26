@@ -14,7 +14,7 @@
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details, save_cocktail_name, get_ingredients_from_db, delete_all_saved_cocktail_names,  DBConnectionError
+from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details, save_cocktail_name, get_ingredients_from_db, delete_all_saved_cocktail_names, get_saved_cocktail_names_from_db, DBConnectionError
 
 app = Flask(__name__)
 CORS(app)
@@ -62,7 +62,7 @@ from flask import request
 @app.route("/cocktail_details", methods=['GET'])
 def get_cocktail_details_route():
     try:
-        cocktail_name = request.args.get('name')  # Retrieve 'name' query parameter
+        cocktail_name = request.args.get('name')  
         if not cocktail_name:
             return jsonify({"error": "Cocktail name is required"}), 400
 
@@ -88,6 +88,18 @@ def save_cocktail_name_route():
         save_cocktail_name(cocktail_name)
         return jsonify({"message": "Cocktail name saved successfully"}), 200
 
+    except DBConnectionError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/saved_cocktails', methods=['GET'])
+def get_saved_cocktail_names_route():
+    try:
+        cocktail_names = get_saved_cocktail_names_from_db()
+        print("Cocktail names heeeere:", cocktail_names)  
+        return jsonify({"saved_cocktails": cocktail_names}), 200
     except DBConnectionError as e:
         return jsonify({"error": str(e)}), 500
     except Exception as e:

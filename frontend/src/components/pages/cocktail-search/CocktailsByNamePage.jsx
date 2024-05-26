@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button } from 'react-bootstrap';
 import CocktailsByNameFetch from './CocktailsByNameFetch';
 import './CocktailsByNamePage.css';
+import SaveButton from '../save-button/SaveButton'; 
 
 const CocktailSearchPage = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
@@ -24,6 +24,11 @@ const CocktailSearchPage = () => {
 
   const handleSetCocktails = (newCocktails) => {
     setCocktails(newCocktails);
+  };
+
+  const saveSearchedCocktail = () => {
+    //originally had the idea to save to local storage but could't get it to work as well as an endpoint!!
+    console.log('Saving searched cocktail...');
   };
 
   return (
@@ -54,7 +59,7 @@ const CocktailSearchPage = () => {
                       ))}
                   </ul>
                   <div className='card-body-buttons'>
-                    <Button variant="primary" className='save-searched-cocktail-button'>Save</Button>
+                    <SaveButton cocktail={selectedCocktail} />
                     <Button className="close-btn" onClick={handleGoBackToList}>Back</Button>
                   </div>
                 </Card.Body>
@@ -69,13 +74,6 @@ const CocktailSearchPage = () => {
 };
 
 export default CocktailSearchPage;
-
-
-
-
-
-
-
 
 
 

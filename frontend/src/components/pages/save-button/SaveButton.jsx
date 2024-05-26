@@ -10,7 +10,7 @@ const SaveButton = ({ cocktail }) => {
             return;
         }
 
-        // Determine the cocktail name based on the format
+        // Determine the cocktail name based on the format - 2 APIS!!
         const cocktailName = cocktail.strDrink || cocktail.cocktail_name;
 
         if (!cocktailName) {
@@ -19,7 +19,7 @@ const SaveButton = ({ cocktail }) => {
             return;
         }
 
-        console.log("Cocktail name to save:", cocktailName); // Debug log
+        console.log("Cocktail name to save:", cocktailName); // Debugging
 
         try {
             const response = await fetch('http://localhost:5000/save_cocktail_name', {
