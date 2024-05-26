@@ -10,20 +10,6 @@ CocktailCreations is an application designed to inspire cocktail enthusiasts of 
 - **GitHub:** [Cazbella](https://github.com/Cazbella)
 - **LinkedIn:** [Caroline-Lane](https://www.linkedin.com/in/caroline-lane7/) 
 
-#### Hannah
-
-- **GitHub:** 
-- **LinkedIn:** 
-
-#### Susan
-
-- **GitHub:** []()
-- **Email:** 
-
-#### Emma
-
-- **GitHub:** []()
-- **Email:** 
 
 ## Table of Contents
 - [Description](#description)
@@ -31,6 +17,7 @@ CocktailCreations is an application designed to inspire cocktail enthusiasts of 
 - [Usage](#usage)
 - [APIs](#APIs)
 - [Challenges](#challenges)
+- [Future-Development](#future-development)
 - [Contributing](#contributing)
 - [License](#license)
 - [Questions](#questions)
@@ -64,10 +51,31 @@ Your motivation for using CocktailCreations could be driven by various factors:
 To run Cocktail Creations locally, follow these steps:
 
 1. Clone the repository to your local machine: `git clone https://github.com/cazbella/CocktailCreations.git`
-2. Navigate to the project directory: `cd CocktailCreations`
-3. Install the required dependencies from requirements.txt using npm: npm install.
-4. Start the application: npm start
-5. Open your web browser and navigate to http://localhost:3000 (or similar) to access CocktailCreations.
+2. Navigate to the project directory: `cd CocktailCreations/backend`
+3. Create a virtual environment:
+    
+    **For Windows**
+
+    `python -m venv env
+.\env\Scripts\activate
+`
+   **For MacOS/Linux**
+   `python3 -m venv env
+source env/bin/activate`
+
+4. Install the required dependencies from requirements.txt using `pip install -r requirements.txt`
+
+5. Start the application: `flask run` or `FLASK_APP=app.py flask run`
+
+7. Now navigate to `cd CocktailCreations/frontend`
+
+8. Ensure you have `Node` installed. 
+
+9. Install dependencies `npm install`
+
+10. Start the development server `npm run dev`
+
+11. Open your web browser and navigate to http://localhost:3000 (or similar) to access CocktailCreations.
 
 
 ### To recreate the cocktailsdb database in your MySQL server
@@ -90,26 +98,43 @@ To run Cocktail Creations locally, follow these steps:
 6. **Ready to use:**
     All the pages and functionality on Cocktail Creations should now bw ready to use!
 
+Ensure that your mySQL server and host are open. Alter the `config.py` to include your details. 
 
 ## Usage
 
 CocktailCreations offers a user-friendly interface for browsing, searching, and discovering cocktail recipes. Upon accessing the application, users are presented with a curated selection of featured cocktails. They can also explore the full collection by browsing categories or using the search functionality to find specific recipes.
 
-Once a cocktail is selected, users can view detailed instructions on how to prepare it, along with a list of ingredients and any additional notes or tips. CocktailCreations aims to provide not only recipes but also educational content to enhance the user's mixology skills and understanding.
+Once a cocktail is selected, users can view instructions on how to prepare it, along with a list of ingredients and any additional notes or tips. CocktailCreations aims to provide recipes and oportunities but for the user to enhance their mixology skills and understanding.
 
 ### To use Cocktail Creations:
 
-1. Visit the [CocktailCreations Website](https://cazbella.github.io/CocktailCreations/) or run it locally following the installation instructions above.
+1. Visit the [CocktailCreations Website](https://cazbella.github.io/CocktailCreations/) (coming soon) or run it locally following the installation instructions above.
+
 2. explore...
 SCREEN SHOTS OF LANDING PAGE AMD OTHER FUNCTIONALITY
 
 ## APIs
 
-This is how we used APIs...
+This project uses the online CocktailsDB found [here](https://www.thecocktaildb.com/api.php). 
+
+I have also created API endpoints to use a database created using the data from the above API. This made the data more versatile. By doing this I was able to create the 'Ingredient Picker', which uses my database to select drinks based on specific ingredients. 
+
+I am also able to store and delete 'saved cocktails' to the database using endpoints. 
 
 ## Challenges
 
-These were the challenges we faced
+Challenges for this project including working acc
+
+## Future-Development
+1. Adding user profiles to save personalised saved cocktail choices
+
+2. Adding volumes to recipes in order to make the information more useful and precise. 
+
+3. Improving the user interface to implement more graphics on some pages.
+
+4. Introducing 'add your own' cocktails for users. This could contribute to the database as a whole pending moderation. 
+
+5. Potentially linking to online shops so users can order ingredients. 
 
 ## Contributing
 
