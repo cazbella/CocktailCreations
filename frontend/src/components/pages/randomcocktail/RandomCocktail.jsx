@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import SaveButton from '../save-button/SaveButton.jsx';
-
 import './RandomCocktailPage.css';
 
 const RandomCocktail = () => {
@@ -12,7 +10,6 @@ const RandomCocktail = () => {
     fetchRandomCocktail();
   }, []);
 
-  // Fetch from cocktailsDB
   const fetchRandomCocktail = () => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
       .then(response => response.json())
@@ -28,8 +25,8 @@ const RandomCocktail = () => {
 
   return (
     <div>
-      <h1 className="text-center title-random">Random Cocktail</h1>
       <div className="container fluid mb-4 random">
+      <h1 className="text-center title-random">Random Cocktail</h1>
         <div className="card-container">
           {cocktail ? (
             <Card>
@@ -47,7 +44,7 @@ const RandomCocktail = () => {
                 </ul>
                 <div className="card-body-buttons">
                   <SaveButton cocktail={cocktail} />
-                  <Button variant="primary" className='get-another-cocktail-button' onClick={fetchRandomCocktail}>Get Another Cocktail</Button>
+                  <Button variant="primary" className='get-another-cocktail-button' onClick={fetchRandomCocktail}>Search again</Button>
                 </div>
               </Card.Body>
             </Card>
@@ -61,3 +58,4 @@ const RandomCocktail = () => {
 };
 
 export default RandomCocktail;
+

@@ -1,3 +1,12 @@
+.nav-link {
+  color: beige !important; 
+  padding: 10px 15px;
+  box-shadow: none;
+  background-color: transparent !important;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
 .custom-navbar {
     position: fixed;
     top: 0;
@@ -17,22 +26,16 @@
     font-size: 1.5rem; 
 }
 
-.nav-link {
-    color: beige !important; 
-    padding: 10px 15px; 
-}
-
 .nav-link:hover {
     color: #FFA500; /* colour for hover effect */
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-  .custom-navbar .navbar-collapse {
-    background-color: rgba(0, 0, 0, 0.5); /* background colour with transparency */
-  }
+
   
   .custom-navbar .navbar-collapse.show {
     background-color: rgba(0, 0, 0, 0.7); /* background colour when expanded with transparency */
     border-radius: 1rem;
   }
+  
   

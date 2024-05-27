@@ -68,24 +68,26 @@ const SavedCocktailsPage = () => {
                 ))}
               </ul>
             ) : (
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">{cocktailDetails.cocktail_name}</h5>
-                  <p className="card-text">Ingredients:</p>
-                  <ul className="card-text">
-                    {cocktailDetails.ingredients.map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
-                    ))}
-                  </ul>
-                  <p className="card-text">Instructions: {cocktailDetails.instructions.instructions}</p>
-                  {cocktailDetails.image_url && (
-                    <img
-                      src={cocktailDetails.image_url.image_url}
-                      className="card-img-top"
-                      alt="Cocktail"
-                    />
-                  )}
-                  <button className="btn btn-secondary back-btn" onClick={handleBackToList}>Back</button>
+              <div className='card-container'>
+                <div className="card">
+                  <div className="card-body">
+                    <h3 className="card-title">{cocktailDetails.cocktail_name}</h3>
+                    <p className="card-text">Ingredients:</p>
+                    <ul className="card-text">
+                      {cocktailDetails.ingredients.map((ingredient, index) => (
+                        <li key={index}>{ingredient}</li>
+                      ))}
+                    </ul>
+                    <p className="card-text">Instructions: {cocktailDetails.instructions.instructions}</p>
+                    {cocktailDetails.image_url && (
+                      <img
+                        src={cocktailDetails.image_url.image_url}
+                        className="card-img-top"
+                        alt="Cocktail"
+                      />
+                    )}
+                    <button className="btn btn-secondary back-btn" onClick={handleBackToList}>Back</button>
+                  </div>
                 </div>
               </div>
             )}
@@ -98,3 +100,5 @@ const SavedCocktailsPage = () => {
 };
 
 export default SavedCocktailsPage;
+
+

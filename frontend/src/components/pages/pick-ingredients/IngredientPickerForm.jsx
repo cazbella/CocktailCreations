@@ -54,16 +54,16 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
     setSearchTerm('');
   };
 
-  const handleNoCocktailsAvailable = () => {
-    setShowModal(true);
-    console.log('No cocktails available');
-  };
+  // const handleNoCocktailsAvailable = () => {
+  //   setShowModal(true);
+  //   console.log('No cocktails available');
+  // };
 
   const handleCloseModal = () => setShowModal(false);
 
   return (
     <div className="ingredient-picker-container">
-      <h2>Select Ingredients</h2>
+      <h2>Select an Ingredient</h2>
       <input
         type="text"
         placeholder="Start typing to search for an ingredient"
@@ -79,7 +79,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
         ))}
       </ul>
       <div className="selected-ingredients-container">
-        <h3 className='selected-title'>Selected Ingredients:</h3>
+        <h3 className='selected-title'>Selected Ingredient:</h3>
         <ul className="selected-ingredients-list">
           {selectedIngredients.map((ingredient, idx) => (
             <li key={idx}>{ingredient}</li>

@@ -103,6 +103,25 @@ h1 {
   margin-bottom: 10px;
 }
 
+.card-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* content doesn't overflow outside the container */
+  margin-bottom: -40px;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px; 
+  height: auto; /* the card cn grow based on its content */
+  max-height: 100%; /* card doesn't overflow the container */
+  overflow: auto; /* the card can scroll if content overflows */
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* to move selected ingredients to bottom right on smaller screens */
 

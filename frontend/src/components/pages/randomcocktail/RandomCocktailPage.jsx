@@ -1,12 +1,13 @@
 import React from 'react';
 import RandomCocktail from './RandomCocktail';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './RandomCocktailPage.css';
 
 const RandomCocktailPage = () => {
   return (
     <div>
-      <h1>Random Cocktail Page</h1>
-      <RandomCocktail />
+      <div className='page-container'>
+        <RandomCocktail />
+      </div>
     </div>
   );
 };

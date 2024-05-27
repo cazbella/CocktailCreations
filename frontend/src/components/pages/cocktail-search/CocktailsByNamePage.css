@@ -1,105 +1,120 @@
 .container {
-    display: flex !important;
-    justify-content: center;
-    margin-bottom: 15px;
-    margin-top: 40px;
-    align-items: center;
-  }
-  
-  .search-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
-  }
+  display: flex !important;
+  justify-content: center;
+  margin-bottom: 15px;
+  align-items: center;
+}
 
-  .search-instructions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .card-container {
-    padding: 20px;
-  }
-  
-  .card {
-    background-color: black; 
-    color: white; 
-    border: none; 
-    border-radius: 1rem;
-  }
-  
-  .card-body {
-    color: white; 
-  }
-  
-  .card-title, .card-text {
-    color: white; 
-  }
-  
-  .card-image {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem; 
-  }
-  
-  .card-body-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
+.title {
+  text-align: center;
+}
 
-  .cocktail-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .cocktail-input {
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid wheat;
-    border-radius: 5px;
-    background-color: black;
-    color: wheat;
-    outline: none;
-    margin-top: 10px;
-  }
-  
-  .cocktail-input::placeholder {
-    color: wheat;
-  }
-  
-  .cocktail-submit-button {
-    padding: 10px 20px;
-    background-color: wheat;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: black 0.5px solid;
-    margin-top: 10px;
-  }
-  
-  .cocktail-submit-button:hover {
-    background-color: #f5deb3;
-    color: black;
-  }
+.search-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
 
-  .close-btn:hover {
-    background-color: #333;
-    color: white;
-  }
-  
-  .cocktail-list {
+.search-instructions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  padding: 20px;
+}
+
+.card {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-body {
+  color: white;
+}
+
+.card-title {
+  padding: 10px;
+  margin-top: -1px;
+  text-align: center;
+}
+
+.card-title,
+.card-text {
+  color: white;
+}
+
+.card-image {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+}
+
+.card-body-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cocktail-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cocktail-input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid wheat;
+  border-radius: 5px;
+  background-color: black;
+  color: wheat;
+  outline: none;
+  margin-top: 10px;
+}
+
+.cocktail-input::placeholder {
+  color: wheat;
+}
+
+.cocktail-submit-button {
+  padding: 10px 20px;
+  background-color: wheat;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: black 0.5px solid;
+  margin-top: 10px;
+}
+
+.cocktail-submit-button:hover {
+  background-color: #f5deb3;
+  color: black;
+}
+
+.close-btn:hover {
+  background-color: #333;
+  color: white;
+}
+
+.cocktail-list {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
-  gap: 10px; 
-  list-style: none; 
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  list-style: none;
   padding: 0;
   background-color: black;
   color: wheat;
@@ -142,5 +157,27 @@
 .save-random-cocktail-button:hover,
 .get-another-cocktail-button:hover {
   background-color: #f5deb3;
-  color: black; 
+  color: black;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  /* the card cn grow based on its content */
+  max-height: 100%;
+  /* card doesn't overflow the container */
+  overflow: auto;
+  /* the card can scroll if content overflows */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
 }

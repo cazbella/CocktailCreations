@@ -7,9 +7,10 @@ import SaveButton from '../save-button/SaveButton';
 
 const IngredientPickerPage = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [fetchedCocktails, setFetchedCocktails] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [cocktailDetails, setCocktailDetails] = useState(null);
-  const [showIngredients, setShowIngredients] = useState(true); // whether to show ingredients or cocktails
+  const [showIngredients, setShowIngredients] = useState(true);
   const [showNoCocktailsModal, setShowNoCocktailsModal] = useState(false);
 
   const handleSelectIngredient = (ingredients) => {
@@ -23,15 +24,16 @@ const IngredientPickerPage = () => {
       const response = await fetch('http://localhost:5000/cocktails', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ingredients: selectedIngredients })
+        body: JSON.stringify({ ingredients: selectedIngredients }),
       });
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
         setCocktails(data);
-        setShowIngredients(false); // Hides ingredients when button clicked
+        setFetchedCocktails(data); // Store fetched cocktails based on selected ingredients
+        setShowIngredients(false);
       } else {
         setCocktails([]);
         setShowNoCocktailsModal(true);
@@ -45,12 +47,15 @@ const IngredientPickerPage = () => {
 
   const handleGetCocktailDetails = async (cocktailName) => {
     try {
-      const response = await fetch(`http://localhost:5000/cocktail_details?name=${encodeURIComponent(cocktailName)}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `http://localhost:5000/cocktail_details?name=${encodeURIComponent(cocktailName)}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -58,15 +63,21 @@ const IngredientPickerPage = () => {
 
       const data = await response.json();
       setCocktailDetails(data);
+      setShowIngredients(false); // Hide ingredient picker when a cocktail is selected
       console.log('Fetched INFO:', data);
     } catch (error) {
       console.error('Error fetching cocktail details:', error);
     }
   };
 
-  const handleBack = () => {
-    setShowIngredients(true); // Show ingredients again when back is clicked by user
-    setCocktailDetails(null); // Clear selected cocktail details when button clicked and go back to list
+  const handleBackToIngredients = () => {
+    setShowIngredients(true); // Set showIngredients state to true to return to ingredient list
+    setCocktailDetails(null);
+  };
+
+  const handleBackToCocktailList = () => {
+    setShowIngredients(false); // Set showIngredients state to false to return to cocktail list
+    setCocktailDetails(null);
   };
 
   const handleCloseNoCocktailsModal = () => {
@@ -79,37 +90,21 @@ const IngredientPickerPage = () => {
   };
 
   return (
-    <div>
-      <h1>Ingredient Picker</h1>
-      {showIngredients ? ( // Show ingredients or cocktails based on state (set ets)
-        <>
-          <IngredientPickerForm
-            onSelectIngredient={handleSelectIngredient}
-            onGetCocktails={handleGetCocktails}
-            selectedIngredients={selectedIngredients}
-            onClearIngredients={handleClearIngredients}
-          />
-        </>
-      ) : (
-        <div>
-          <button className='back' onClick={handleBack}>Back</button> {/* back button */}
-          <div>
-            <ul className="cocktail-list">
-              {cocktails.map((cocktail, index) => (
-                <li key={index} className="cocktail-item">
-                  <button onClick={() => handleGetCocktailDetails(cocktail.name)}>
-                    {cocktail.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-      {cocktailDetails && (
-        <Card>
+    <div className="container"> {/* Wrapping content in a container div */}
+      <h1 style={{ textAlign: 'center', margin: '10px' }}>{showIngredients ? 'Ingredient Picker' : (cocktailDetails ? 'Your Cocktail' : 'Cocktails')}</h1>
+
+      {showIngredients ? (
+        <IngredientPickerForm
+          onSelectIngredient={handleSelectIngredient}
+          onGetCocktails={handleGetCocktails}
+          selectedIngredients={selectedIngredients}
+          onClearIngredients={handleClearIngredients}
+        />
+      ) : cocktailDetails ? (
+        <div className="card-container">
+        <Card className="card">
           <Card.Body>
-            <Card.Title className='title-picked-cocktail'>{cocktailDetails.cocktail_name}</Card.Title>
+            <Card.Title className="title-picked-cocktail">{cocktailDetails.cocktail_name}</Card.Title>
             <Card.Text>Ingredients:</Card.Text>
             <ul>
               {cocktailDetails.ingredients.map((ingredient, index) => (
@@ -117,23 +112,42 @@ const IngredientPickerPage = () => {
               ))}
             </ul>
             <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
-           
             {cocktailDetails.image_url && (
-              <img className='image'
+              <img
+                className="image"
                 src={cocktailDetails.image_url.image_url}
                 alt="Cocktail"
                 onError={(e) => {
-                  e.target.onerror = null; // stops infinite loop
-                  e.target.src = 'fallback-image-url.jpg'; // need to put one here
+                  e.target.onerror = null;
+                  e.target.src = 'fallback-image-url.jpg';
                 }}
               />
             )}
             <div className="card-body-buttons">
               <SaveButton cocktail={cocktailDetails} />
-              <Button className='back-bottom' variant="secondary" onClick={handleBack}>Back</Button>
+              <Button className="back-bottom" variant="secondary" onClick={handleBackToCocktailList}>
+                Back
+              </Button>
             </div>
           </Card.Body>
         </Card>
+      </div>
+      
+      ) : (
+        <div>
+          <button className="back" onClick={handleBackToIngredients}>
+            Back
+          </button>
+          <div>
+            <ul className="cocktail-list">
+              {cocktails.map((cocktail, index) => (
+                <li key={index} className="cocktail-item">
+                  <button onClick={() => handleGetCocktailDetails(cocktail.name)}>{cocktail.name}</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       )}
       <Modal show={showNoCocktailsModal} onHide={handleCloseNoCocktailsModal}>
         <Modal.Header closeButton>
@@ -151,6 +165,7 @@ const IngredientPickerPage = () => {
 };
 
 export default IngredientPickerPage;
+
 
 
 

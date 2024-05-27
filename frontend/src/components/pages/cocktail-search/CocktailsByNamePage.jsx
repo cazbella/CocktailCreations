@@ -42,7 +42,7 @@ const CocktailSearchPage = () => {
         />
       ) : (
         <div>
-          <h1 className="text-center">Selected Cocktail</h1>
+          <h1 className="title">Selected Cocktail</h1>
           <div className="card-container">
             {selectedCocktail && (
               <Card className="card">

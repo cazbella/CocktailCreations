@@ -8,6 +8,11 @@
     margin-top: 40px;
     margin-bottom: 15px;
   }
+
+  .card {
+
+    height: 70%;
+  }
   
 
   .cocktail-list {
@@ -53,4 +58,42 @@
   }
   
   
-  
+.container {
+  padding: 20px;
+}
+
+.card-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* content doesn't overflow outside the container */
+}
+
+.card {
+  width: 100%;
+  max-width: 600px; 
+  height: auto; /* the card cn grow based on its content */
+  max-height: 100%; /* card doesn't overflow the container */
+  overflow: auto; /* the card can scroll if content overflows */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card img {
+  max-width: 100%; 
+  height: auto;
+}
+
+.back-btn {
+  margin-top: 20px;
+  background-color: wheat;
+  border: none;
+  color: black;
+  outline: none;
+}
+
