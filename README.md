@@ -110,8 +110,43 @@ Once a cocktail is selected, users can view instructions on how to prepare it, a
 
 1. Visit the [CocktailCreations Website](https://cazbella.github.io/CocktailCreations/) (coming soon) or run it locally following the installation instructions above.
 
-2. explore...
-SCREEN SHOTS OF LANDING PAGE AMD OTHER FUNCTIONALITY
+2. Start at the home page, where you will find information about the site. 
+
+![home-page](frontend/src/assets/images/screen-shots/home-page.png)
+
+Use the nav links at the top of the page to navigate to the following pages
+
+3. **Cocktail Search**
+
+ ![cocktail-search](frontend/src/assets/images/screen-shots/search-page.png)
+
+Type in a name or part of the name to search for a cocktail. 
+
+4. **Random Cocktail**
+
+ ![random-cocktail](frontend/src/assets/images/screen-shots/random-cocktail.png)
+
+The page will present you with a random cocktail. You can save this cocktail to your favourites or search for another cocktail using the buttons. 
+
+5. **Ingredient Picker**
+
+ ![ingredient-picker](frontend/src/assets/images/screen-shots/ingredient-picker.png)
+
+Type in an ingredient or pick one from the list. This then adds to the 'selected ingredient' list. Click 'Get Cocktails' to get a list of cocktails with these ingredients as shown here 
+
+![searched-for-cocktails](frontend/src/assets/images/screen-shots/searched-for-cocktails.png)
+
+Click a cocktail name to be presented with your chosen cocktail.
+
+![chosen-cocktail](frontend/src/assets/images/screen-shots/chosen-cocktail.png)
+
+6. **Saved Cocktails**
+
+ ![saved-cocktails](frontend/src/assets/images/screen-shots/saved-cocktails.png)
+
+All the 'save' buttons use the API to save the cocktail names to the database. The names are displayed on this page. Click a name to see the cocktail details!
+
+Clear all the saved cocktails using the 'Clear Saved Cocktails' button. 
 
 ## APIs
 
