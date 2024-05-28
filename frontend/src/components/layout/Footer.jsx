@@ -19,7 +19,7 @@ function CustomFooter() {
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/" onClick={closeMenu}>Home</Nav.Link>
           <Nav.Link href="https://www.drinkaware.co.uk/" onClick={closeMenu}>DrinkAware</Nav.Link>
-          <Nav.Link href="https://github.com/your-repo" onClick={closeMenu}>Github</Nav.Link>
+          <Nav.Link href="https://github.com/cazbella/CocktailCreations.git" onClick={closeMenu}>Github</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
