@@ -34,15 +34,11 @@ CocktailCreations is a web application designed to provide users with a vast col
 
 Your motivation for using CocktailCreations could be driven by various factors:
 
-1. Passion for Cocktails: You have a genuine love for cocktails and enjoy experimenting with new recipes and flavors. CocktailCreations provides you with a convenient platform to indulge in your passion and discover exciting new concoctions.
-
-2. Social Gatherings: You frequently host gatherings or parties and want to impress your guests with unique and delicious cocktails. CocktailCreations helps you find the perfect recipes to elevate your hosting game and create memorable experiences for your friends and family.
-
-3. Personal Growth: You view mixology as a hobby and are constantly seeking to improve your skills and knowledge. CocktailCreations offers educational resources and a diverse range of recipes to help you expand your repertoire and become a more proficient home bartender.
-
-4. Exploration and Discovery: You enjoy exploring different flavors and ingredients and are always on the lookout for new cocktail recipes to try. CocktailCreations satisfies your curiosity by providing a vast database of recipes, allowing you to embark on a journey of discovery and creativity in the world of mixology.
-
-5. Convenience and Accessibility: You appreciate the convenience of having access to a centralized platform where you can easily find, save, and reference cocktail recipes whenever you need them. CocktailCreations offers a user-friendly interface and robust search functionality, making it effortless to navigate and explore its extensive collection of recipes.
+- Passion for Cocktails: Discover new recipes and flavors.
+- Social Gatherings: Impress guests with unique cocktails.
+- Personal Growth: Improve mixology skills.
+- Exploration and Discovery: Explore different flavors and ingredients.
+- Convenience and Accessibility: Centralized platform for easy access to recipes.
 
 <br>
 
@@ -158,7 +154,9 @@ I am also able to store and delete 'saved cocktails' to the database using endpo
 
 ## Challenges
 
-Challenges for this project including working acc
+Working with multiple APIs and integrating them into a cohesive application.
+
+Integrating front and back end in order to achieve the required functionality. 
 
 ## Future-Development
 1. Adding user profiles to save personalised saved cocktail choices
