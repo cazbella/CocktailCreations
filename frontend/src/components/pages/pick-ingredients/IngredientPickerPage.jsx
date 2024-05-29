@@ -105,13 +105,27 @@ const IngredientPickerPage = () => {
         <Card className="card">
           <Card.Body>
             <Card.Title className="title-picked-cocktail">{cocktailDetails.cocktail_name}</Card.Title>
-            <Card.Text>Ingredients:</Card.Text>
-            <ul>
-              {cocktailDetails.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
-              ))}
-            </ul>
-            <Card.Text>Instructions: {cocktailDetails.instructions.instructions}</Card.Text>
+            {/* <p className="card-text">Ingredients:</p> */}
+            <table className="custom-table">
+
+<thead>
+  <tr>
+    <th>Ingredient</th>
+    <th>Measure</th>
+  </tr>
+</thead>
+<tbody>
+  {cocktailDetails.ingredients.map((ingredient, index) => (
+    <tr key={index}>
+      <td>{ingredient}</td>
+      <td>{cocktailDetails.measures[index]}</td>
+    </tr>
+  ))}
+</tbody>
+</table>
+
+<h5 className="card-text">Instructions </h5>
+<p>{cocktailDetails.instructions.instructions}</p>
             {cocktailDetails.image_url && (
               <img
                 className="image"

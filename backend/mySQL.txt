@@ -73,6 +73,27 @@ CREATE TABLE saved_cocktails (
     name VARCHAR(255),
 );
 
+CREATE TABLE measures (
+    cocktail_id VARCHAR(255),
+    measure1 VARCHAR(255),
+    measure2 VARCHAR(255),
+    measure3 VARCHAR(255),
+    measure4 VARCHAR(255),
+    measure5 VARCHAR(255),
+    measure6 VARCHAR(255),
+    measure7 VARCHAR(255),
+    measure8 VARCHAR(255),
+    measure9 VARCHAR(255),
+    measure10 VARCHAR(255),
+    measure11 VARCHAR(255),
+    measure12 VARCHAR(255),
+    measure13 VARCHAR(255),
+    measure14 VARCHAR(255),
+    measure15 VARCHAR(255),
+    PRIMARY KEY (cocktail_id)
+);
+
+
 **********************************************
 
 *****Below are the queries run to test the queries that were used in db_utils. *********

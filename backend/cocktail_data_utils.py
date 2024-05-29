@@ -19,6 +19,7 @@ class CocktailDB:
         )
         self.cursor = self.connection.cursor()
 
+    # Function to fetch cocktails by first letter
     def fetch_cocktails_by_letter(self, letter):
         url = f"https://www.thecocktaildb.com/api/json/v1/1/search.php?f={letter}"
         response = requests.get(url)
@@ -28,6 +29,9 @@ class CocktailDB:
             print(f"Error fetching cocktails for letter {letter}: {response.status_code}")
             return []
 
+     # Function to fetch all cocktails
+    # loope through alphabet and fetch them all with the free API
+    # now we need to work out how ro parse them and add them to the database
     def fetch_all_cocktails(self):
         all_cocktails = []
         # the loop is here 
@@ -85,6 +89,22 @@ class CocktailDB:
                                     (cocktail["idDrink"], alcoholic_status))
                 print(f"Inserted data into alcoholic_status table for cocktail: {cocktail['strDrink']}")
                 self.connection.commit()
+
+        # Inserts measures data into the measures table
+    def insert_measures_data(self, cocktail_id, measures):
+        placeholders = ", ".join(["%s"] * len(measures))
+        self.cursor.execute("INSERT INTO measures (cocktail_id, " + ", ".join(
+            [f"measure{i}" for i in range(1, len(measures) + 1)]) + ") VALUES (%s, " + placeholders + ")",
+            tuple([cocktail_id] + measures))
+        print(f"Inserted data into measures table for cocktail_id {cocktail_id}")
+
+        # Commits the transaction
+        self.connection.commit()
+
+    def close_connection(self):
+        self.connection.close()
+
+    
 
     def close_connection(self):
         self.connection.close()

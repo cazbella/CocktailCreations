@@ -165,10 +165,20 @@ def get_cocktail_details(cocktail_name):
         cursor.execute(query_video, (cocktail_name,))
         video_url = cursor.fetchone()
         
+        query_measures = ("SELECT measure1, measure2, measure3, measure4, measure5, measure6, measure7, "
+                          "measure8, measure9, measure10, measure11, measure12, measure13, measure14, measure15 "
+                          "FROM measures WHERE cocktail_id IN "
+                          "(SELECT id FROM cocktail_names WHERE name = %s);")
+        cursor.execute(query_measures, (cocktail_name,))
+        measures_row = cursor.fetchone()
+        
+        measures = [value for value in measures_row.values() if value is not None]
+        
         details['ingredients'] = ingredients
         details['instructions'] = instructions
         details['image_url'] = image_url
         details['video_url'] = video_url
+        details['measures'] = measures
 
     except Exception as e:
         raise DBConnectionError(f"Failed to read from database: {e}")

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import CocktailsByNameFetch from './CocktailsByNameFetch';
 import './CocktailsByNamePage.css';
-import SaveButton from '../save-button/SaveButton'; 
+import SaveButton from '../save-button/SaveButton';
 
 const CocktailSearchPage = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
@@ -45,22 +45,35 @@ const CocktailSearchPage = () => {
           <h1 className="title">Selected Cocktail</h1>
           <div className="card-container">
             {selectedCocktail && (
-              <Card className="card">
-                <h1 className='card-title'>{selectedCocktail.strDrink}</h1>
-                <Card.Img className='card-image' variant="top" src={selectedCocktail.strDrinkThumb} alt={selectedCocktail.strDrink} />
-                <Card.Body className='card-body'>
+              <Card>
+                <Card.Body>
+                  <h1 className='card-title'>{selectedCocktail.strDrink}</h1>
+                  <table className="custom-table">
+                    <thead>
+                      <tr>
+                        <th>Ingredient</th>
+                        <th>Measure</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Object.keys(selectedCocktail)
+                        .filter(key => key.startsWith('strIngredient') && selectedCocktail[key])
+                        .map((key, index) => (
+                          <tr key={key}>
+                            <td>{selectedCocktail[key]}</td>
+                            <td>{selectedCocktail[`strMeasure${index + 1}`]}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                  <h5 className="text-center mt-4">Instructions</h5>
                   <Card.Text>{selectedCocktail.strInstructions}</Card.Text>
-                  <Card.Text>Ingredients:</Card.Text>
-                  <ul className='ingredient-list'>
-                    {Object.keys(selectedCocktail)
-                      .filter(key => key.startsWith('strIngredient') && selectedCocktail[key])
-                      .map(key => (
-                        <li key={key}>{selectedCocktail[key]}</li>
-                      ))}
-                  </ul>
-                  <div className='card-body-buttons'>
+                  <div className="card-image mt-4">
+                    <Card.Img variant="top" src={selectedCocktail.strDrinkThumb} alt={selectedCocktail.strDrink} />
+                  </div>
+                  <div className="card-body-buttons">
                     <SaveButton cocktail={selectedCocktail} />
-                    <Button className="close-btn" onClick={handleGoBackToList}>Back</Button>
+                    <Button variant="primary" className='close-btn' onClick={handleGoBackToList}>Back</Button>
                   </div>
                 </Card.Body>
               </Card>

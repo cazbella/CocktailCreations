@@ -72,13 +72,27 @@ const SavedCocktailsPage = () => {
                 <div className="card">
                   <div className="card-body">
                     <h3 className="card-title">{cocktailDetails.cocktail_name}</h3>
-                    <p className="card-text">Ingredients:</p>
-                    <ul className="card-text">
-                      {cocktailDetails.ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))}
-                    </ul>
-                    <p className="card-text">Instructions: {cocktailDetails.instructions.instructions}</p>
+                    {/* <p className="card-text">Ingredients:</p> */}
+                    <table className="custom-table">
+
+                      <thead>
+                        <tr>
+                          <th>Ingredient</th>
+                          <th>Measure</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cocktailDetails.ingredients.map((ingredient, index) => (
+                          <tr key={index}>
+                            <td>{ingredient}</td>
+                            <td>{cocktailDetails.measures[index]}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    <h5 className="card-text">Instructions </h5>
+                    <p>{cocktailDetails.instructions.instructions}</p>
                     {cocktailDetails.image_url && (
                       <img
                         src={cocktailDetails.image_url.image_url}
@@ -100,5 +114,3 @@ const SavedCocktailsPage = () => {
 };
 
 export default SavedCocktailsPage;
-
-

@@ -46,7 +46,7 @@ function Home() {
 
   return (
     <div className="home-page">
-      <div className="welcome-message">Cocktail Creations</div>
+       <h1 style={{fontSize: "3rem"}}>Cocktail Creations</h1>
       <h3>Your cocktails, mixed your way.</h3>
 
       <CSSTransition in={showImages} timeout={1000} classNames="fade" unmountOnExit>

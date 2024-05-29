@@ -84,6 +84,11 @@
   flex-grow: 1;
 }
 
+.card-title {
+  background-color: rgb(31, 31, 31);
+  border-radius: 1rem;
+}
+
 .card img {
   max-width: 100%; 
   height: auto;
@@ -96,4 +101,24 @@
   color: black;
   outline: none;
 }
+.custom-table {
+  background-color: black;
+  border-collapse: collapse; /* table borders collapse properly */
+  width: 70%; /* width of the table */
+  border-radius: 10px !important; 
+  margin: 0 auto 20px; /* centre table horizontally and add bottom margin */
+  margin-bottom: 30px;
+}
 
+.custom-table th, .custom-table td {
+  padding: 10px; 
+  text-align: center;
+}
+
+.custom-table td {
+  padding: 1px;
+}
+
+.card-text, p {
+  text-align: center;
+}
