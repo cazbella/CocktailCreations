@@ -161,9 +161,9 @@ Integrating front and back end in order to achieve the required functionality.
 ## Future-Development
 1. Adding user profiles to save personalised saved cocktail choices
 
-2. Adding volumes to recipes in order to make the information more useful and precise. 
+2. Adding videos to the website - these are in the API and database. 
 
-3. Improving the user interface to implement more graphics on some pages.
+3. Using recursion to generate a recipe based on user preference, rather than matching to a current recipe.
 
 4. Introducing 'add your own' cocktails for users. This could contribute to the database as a whole pending moderation. 
 

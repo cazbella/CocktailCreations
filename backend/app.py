@@ -57,8 +57,6 @@ def get_cocktails():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-from flask import request
-
 @app.route("/cocktail_details", methods=['GET'])
 def get_cocktail_details_route():
     try:
@@ -73,8 +71,6 @@ def get_cocktail_details_route():
         return jsonify({"error": str(e)}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-from flask import request
 
 @app.route("/save_cocktail_name", methods=['POST'])
 def save_cocktail_name_route():
