@@ -2,13 +2,13 @@
 
 ********************************************
 
-CREATE DATABASE cocktailsdb
+CREATE DATABASE cocktailsdb;
 
-USE cocktailsdb
+USE cocktailsdb;
 
 CREATE TABLE cocktail_names (
     id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE ingredients (
@@ -27,31 +27,42 @@ CREATE TABLE ingredients (
     ingredient12 VARCHAR(255),
     ingredient13 VARCHAR(255),
     ingredient14 VARCHAR(255),
-    ingredient15 VARCHAR(255)
+    ingredient15 VARCHAR(255),
+    CONSTRAINT fk_cocktail_ingr FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE
 );
 
 CREATE TABLE instructions (
     cocktail_id VARCHAR(255) PRIMARY KEY,
-    instructions TEXT
+    instructions TEXT,
+CONSTRAINT fk_cocktail_instructions FOREIGN KEY (cocktail_id) 
+REFERENCES cocktail_names (id) ON DELETE CASCADE
 );
 
 CREATE TABLE images (
     cocktail_id VARCHAR(255) PRIMARY KEY,
-    image_url VARCHAR(255)
+    image_url VARCHAR(255),
+CONSTRAINT fk_cocktail_img FOREIGN KEY (cocktail_id) 
+REFERENCES cocktail_names (id) ON DELETE CASCADE
 );
 
 CREATE TABLE videos (
     cocktail_id VARCHAR(255) PRIMARY KEY,
-    video_url VARCHAR(255)
+    video_url VARCHAR(255),
+FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE drinks_information (
     id VARCHAR(255) PRIMARY KEY,
     category VARCHAR(255),
-    type VARCHAR(255)
+    type VARCHAR(255),
     strIBA VARCHAR(255),
     strTags VARCHAR(255),
-    dateModified DATETIME
+    dateModified DATETIME,
+CONSTRAINT fk_cocktail_drink_info FOREIGN KEY (cocktail_id) 
+REFERENCES cocktail_names (id) ON DELETE CASCADE
 );
 
 CREATE TABLE glass_type (
@@ -60,17 +71,23 @@ CREATE TABLE glass_type (
     PRIMARY KEY (cocktail_id, glass)
 );
 
+ALTER TABLE glass_type ADD CONSTRAINT fk_cocktails_glass_type FOREIGN KEY (cocktail_id) 
+REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
 CREATE TABLE alcoholic_status (
     cocktail_id VARCHAR(255),
     status VARCHAR(255),
     PRIMARY KEY (cocktail_id, status)
 );
 
+ALTER TABLE alcoholic_status ADD CONSTRAINT fk_cocktails_alcoholic_status FOREIGN KEY (cocktail_id) 
+REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
 // to create saved cocktails TABLE
 
 CREATE TABLE saved_cocktails (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE measures (
@@ -91,6 +108,9 @@ CREATE TABLE measures (
     measure14 VARCHAR(255),
     measure15 VARCHAR(255),
     PRIMARY KEY (cocktail_id)
+    FOREIGN KEY (cocktail_id) 
+        REFERENCES cocktail_names (id)
+        ON DELETE CASCADE
 );
 
 
