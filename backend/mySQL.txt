@@ -2,9 +2,9 @@
 
 ********************************************
 
-CREATE DATABASE cocktailsdb
+CREATE DATABASE cocktaildb
 
-USE cocktailsdb
+USE cocktaildb
 
 CREATE TABLE cocktail_names (
     id VARCHAR(255) PRIMARY KEY,
@@ -216,3 +216,64 @@ SELECT * FROM saved_cocktail_names;
 -- DELETE FROM saved_cocktail_names;
 
 
+************************************************************
+
+Potential additions by susan
+
+START TRANSACTION;
+
+USE cocktaildb;
+
+ALTER TABLE cocktail_names MODIFY COLUMN name VARCHAR(255) NOT NULL;
+
+-- foreign keys & constraints to ingredients table
+ALTER TABLE ingredients 
+    ADD CONSTRAINT fk_cocktail_ingr FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to instructions table
+ALTER TABLE instructions 
+    ADD CONSTRAINT fk_cocktail_instructions FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to images table
+ALTER TABLE images 
+    ADD CONSTRAINT fk_cocktail_img FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to videos table
+ALTER TABLE videos 
+    ADD CONSTRAINT fk_cocktail_vid FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to drinks_information table
+ALTER TABLE drinks_information 
+    ADD CONSTRAINT fk_cocktail_drink_info FOREIGN KEY (id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to glass_type table
+ALTER TABLE glass_type 
+    ADD CONSTRAINT fk_cocktails_glass_type FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to alcoholic_status table
+ALTER TABLE alcoholic_status 
+    ADD CONSTRAINT fk_cocktails_alcoholic_status FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- foreign keys & constraints to measures table
+ALTER TABLE measures 
+    ADD CONSTRAINT fk_cocktail_measures FOREIGN KEY (cocktail_id) 
+    REFERENCES cocktail_names (id) ON DELETE CASCADE;
+
+-- check saved_cocktails table exists
+CREATE TABLE IF NOT EXISTS saved_cocktails (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+COMMIT;
+
+-- in case of any error
+-- rollback will occur automatically if any statement fails before 'commit'
+ROLLBACK;
