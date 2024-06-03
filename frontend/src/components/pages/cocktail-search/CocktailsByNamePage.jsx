@@ -67,7 +67,7 @@ const CocktailSearchPage = () => {
                     </tbody>
                   </table>
                   <h5 className="text-center mt-4">Instructions</h5>
-                  <Card.Text>{selectedCocktail.strInstructions}</Card.Text>
+                  <Card.Text className='card-text'>{selectedCocktail.strInstructions}</Card.Text>
                   <div className="card-image mt-4">
                     <Card.Img variant="top" src={selectedCocktail.strDrinkThumb} alt={selectedCocktail.strDrink} />
                   </div>
