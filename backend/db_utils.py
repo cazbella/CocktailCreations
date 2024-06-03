@@ -3,6 +3,7 @@
 import mysql.connector
 import logging
 from config import HOST, USER, PASSWORD
+import itertools
 
 # setup logging configuration 
 #https://docs.python.org/3/library/logging.html#
@@ -65,7 +66,10 @@ def get_ingredients_from_db():
         cursor.execute(query)
         results = cursor.fetchall()
 
-        ingredients = [row[0] for row in results if row[0]]  # filter out None values
+        # 'flatten the list of lists' and filter out None values
+        # code can directly flatten the list of tuples into a single list of ingredients
+        ingredients = [ingredient for ingredient in itertools.chain.from_iterable(results) if ingredient]
+        # ingredients = [row[0] for row in results if row[0]]  # filter out None values
         # print("Fetched ingredients:", ingredients)
 
     except Exception as e:
