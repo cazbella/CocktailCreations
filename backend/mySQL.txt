@@ -2,9 +2,9 @@
 
 ********************************************
 
-CREATE DATABASE cocktailsdb
+CREATE DATABASE cocktailsdb;
 
-USE cocktailsdb
+USE cocktailsdb;
 
 CREATE TABLE cocktail_names (
     id VARCHAR(255) PRIMARY KEY,
@@ -48,7 +48,7 @@ CREATE TABLE videos (
 CREATE TABLE drinks_information (
     id VARCHAR(255) PRIMARY KEY,
     category VARCHAR(255),
-    type VARCHAR(255)
+    type VARCHAR(255),
     strIBA VARCHAR(255),
     strTags VARCHAR(255),
     dateModified DATETIME
@@ -70,7 +70,7 @@ CREATE TABLE alcoholic_status (
 
 CREATE TABLE saved_cocktails (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255)
 );
 
 CREATE TABLE measures (
