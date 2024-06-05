@@ -16,7 +16,7 @@ const SavedCocktailsPage = () => {
         throw new Error(`Failed to fetch saved cocktails. Status: ${response.status}`);
       }
       const data = await response.json();
-      setSavedCocktails(data.saved_cocktails);
+      setSavedCocktails(data); // No need for .saved_cocktails as the data itself is an array
     } catch (error) {
       console.error('Error fetching saved cocktails:', error);
       setError('Failed to load saved cocktails. Please try again later.');
@@ -25,7 +25,7 @@ const SavedCocktailsPage = () => {
 
   const fetchCocktailDetails = async (cocktailName) => {
     try {
-      const response = await fetch(`http://localhost:5000/cocktail_details?name=${encodeURIComponent(cocktailName)}`);
+      const response = await fetch(`http://localhost:5000/cocktail?name=${encodeURIComponent(cocktailName)}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch cocktail details. Status: ${response.status}`);
       }
@@ -72,9 +72,7 @@ const SavedCocktailsPage = () => {
                 <div className="card">
                   <div className="card-body">
                     <h3 className="card-title">{cocktailDetails.cocktail_name}</h3>
-                    {/* <p className="card-text">Ingredients:</p> */}
                     <table className="custom-table">
-
                       <thead>
                         <tr>
                           <th>Ingredient</th>
@@ -90,7 +88,6 @@ const SavedCocktailsPage = () => {
                         ))}
                       </tbody>
                     </table>
-
                     <h5 className="card-text">Instructions </h5>
                     <p>{cocktailDetails.instructions.instructions}</p>
                     {cocktailDetails.image_url && (
