@@ -1,11 +1,14 @@
+# this tests the fetching the names from the saved cocktail table.
+
 import unittest
-from db_utils import get_saved_cocktail_names, DBConnectionError
+from db_utils import get_saved_cocktail_names_from_db, DBConnectionError
+
 
 class TestGetSavedCocktailNames(unittest.TestCase):
 
     def test_get_saved_cocktail_names_success(self):
         try:
-            result = get_saved_cocktail_names()
+            result = get_saved_cocktail_names_from_db()
             print("Test result:", result)
             self.assertTrue(len(result) > 0, "The result should contain at least one cocktail name.")
         except DBConnectionError as e:
@@ -13,7 +16,7 @@ class TestGetSavedCocktailNames(unittest.TestCase):
 
     def test_get_saved_cocktail_names_db_connection_error(self):
         try:
-            result = get_saved_cocktail_names()
+            result = get_saved_cocktail_names_from_db()
             # print("Test result:", result)
             self.assertTrue(len(result) > 0, "The result should contain at least one cocktail name.")
         except DBConnectionError as e:

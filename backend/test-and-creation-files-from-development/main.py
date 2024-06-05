@@ -6,7 +6,8 @@
 
 import json
 import requests
-from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details
+# you may need to move this file to the root directory if you would like to run this. I could not get the filepath to work despite reasearch
+from ..db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details
 
 class CocktailApp:
     def __init__(self, server_url):

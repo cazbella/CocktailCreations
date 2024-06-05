@@ -215,6 +215,59 @@ CREATE TABLE measures (
 SELECT * FROM saved_cocktail_names;
 -- DELETE FROM saved_cocktail_names;
 
+-- INSERT INTO saved_cocktail_names (name) VALUES ('White Russian');
+
+-- SELECT * FROM saved_cocktail_names WHERE name = 'White Russian';
+
+-- SELECT * FROM saved_cocktail_names;
+-- DELETE FROM saved_cocktail_names;
+
+-- SELECT * FROM cocktail_names WHERE name = 'brandy sour';
+
+-- CREATE TABLE measures (
+--     cocktail_id VARCHAR(255),
+--     measure1 VARCHAR(255),
+--     measure2 VARCHAR(255),
+--     measure3 VARCHAR(255),
+--     measure4 VARCHAR(255),
+--     measure5 VARCHAR(255),
+--     measure6 VARCHAR(255),
+--     measure7 VARCHAR(255),
+--     measure8 VARCHAR(255),
+--     measure9 VARCHAR(255),
+--     measure10 VARCHAR(255),
+--     measure11 VARCHAR(255),
+--     measure12 VARCHAR(255),
+--     measure13 VARCHAR(255),
+--     measure14 VARCHAR(255),
+--     measure15 VARCHAR(255),
+--     PRIMARY KEY (cocktail_id)
+-- );
+
+-- select * from measures;
+
+-- SELECT 
+--     m.measure1,
+--     m.measure2,
+--     m.measure3,
+--     m.measure4,
+--     m.measure5,
+--     m.measure6,
+--     m.measure7,
+--     m.measure8,
+--     m.measure9,
+--     m.measure10,
+--     m.measure11,
+--     m.measure12,
+--     m.measure13,
+--     m.measure14,
+--     m.measure15
+-- FROM 
+--     cocktail_names cn
+-- JOIN 
+--     measures m ON cn.id = m.cocktail_id
+-- WHERE 
+--     cn.name = 'grasshopper';
 
 ************************************************************
 

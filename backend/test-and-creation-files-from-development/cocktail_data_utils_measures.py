@@ -1,5 +1,5 @@
 # code now redundant.
-# i implemented measures afterwars. This code populate this table 
+# i implemented measures afterwars. This code populates this table 
 """CREATE TABLE measures (
     cocktail_id VARCHAR(255),
     measure1 VARCHAR(255),
