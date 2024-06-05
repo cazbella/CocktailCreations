@@ -8,22 +8,24 @@ import requests
 class TestCocktailApp(unittest.TestCase):
 
     def setUp(self):
-        # Flask running local on port 5000
+        # Flask on port 5000
         self.base_url = 'http://localhost:5000'
 
     def test_delete_saved_cocktail_names(self):
-        # created endpoint for deleting saved cocktail names
-        delete_endpoint = f'{self.base_url}/delete_saved_cocktail_names'
+        delete_endpoint = f'{self.base_url}/delete_saved_cocktails'
 
-        # send delete request to the endpoint
-        response = requests.delete(delete_endpoint)
+        # send delete request
+        try:
+            response = requests.delete(delete_endpoint)
 
-        # Check response status code
-        self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 204, "Expected status code 204 for successful deletion")
 
-        # response message as expected?
-        expected_message = "All entries deleted from saved_cocktail_names table"
-        self.assertEqual(response.text, expected_message)
+            # response message matches expected message
+            expected_message = ""
+            self.assertEqual(response.text, expected_message, "Expected empty response")
+
+        except Exception as e:
+            self.fail(f"Failed to delete saved cocktail names: {e}")
 
 if __name__ == '__main__':
     unittest.main()

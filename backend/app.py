@@ -16,106 +16,72 @@
 
 """
 
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details, save_cocktail_name, get_ingredients_from_db, delete_all_saved_cocktail_names, get_saved_cocktail_names_from_db, DBConnectionError
+from db_utils import CocktailDB, DBConnectionError
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # need CORS as had lots of errors
 
-@app.route("/")
-def hello_world():
-    return "Hello world"
+# initialise the CocktailDB instance
+cocktail_db = CocktailDB('cocktaildb')
 
+# for populating ingredient picker page
 @app.route('/ingredients', methods=['GET'])
 def get_ingredients():
     try:
-        ingredients = get_ingredients_from_db()
-        return jsonify({"ingredients": ingredients}), 200
+        ingredients = cocktail_db.get_ingredients_from_db()
+        return jsonify(ingredients)
     except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    
+        return str(e), 500
 
-@app.route("/cocktails", methods=['POST'])
-def get_cocktails():
+# for getting cocktails based on ingredients
+@app.route('/cocktails', methods=['POST'])
+def show_cocktails():
+    selected_ingredients = request.json.get('ingredients', [])
     try:
-        data = request.json
-        selected_ingredients = data.get('ingredients', [])
+        cocktails = cocktail_db.show_cocktails_from_picked_ingredients(selected_ingredients)
+        return jsonify(cocktails)
+    except (DBConnectionError, ValueError) as e:
+        return str(e), 500
 
-        if not selected_ingredients or not isinstance(selected_ingredients, list):
-            return jsonify({"error": "Invalid input, please provide a list of ingredients"}), 400
-
-        cocktails = show_cocktails_from_picked_ingredients(selected_ingredients)
-
-        if not cocktails:
-            return jsonify({"message": "No cocktails found with the selected ingredients"}), 404
-
-        return jsonify(cocktails), 200
-
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/cocktail_details", methods=['GET'])
-def get_cocktail_details_route():
+# for getting all details for a cocktail based on a name
+@app.route('/cocktail', methods=['GET'])
+def get_cocktail_details():
+    cocktail_name = request.args.get('name')
     try:
-        cocktail_name = request.args.get('name')  
-        if not cocktail_name:
-            return jsonify({"error": "Cocktail name is required"}), 400
+        details = cocktail_db.get_cocktail_details(cocktail_name)
+        return jsonify(details)
+    except (DBConnectionError, ValueError) as e:
+        return str(e), 500
 
-        details = get_cocktail_details(cocktail_name)
-        return jsonify(details), 200
-
-    except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/save_cocktail_name", methods=['POST'])
-def save_cocktail_name_route():
+# for saving the cocktail
+@app.route('/save_cocktail', methods=['POST'])
+def save_cocktail():
+    cocktail_name = request.json.get('name')
     try:
-        data = request.json
-        cocktail_name = data.get('name')
-
-        if not cocktail_name:
-            return jsonify({"error": "Cocktail name is required"}), 400
-
-        save_cocktail_name(cocktail_name)
-        return jsonify({"message": "Cocktail name saved successfully"}), 200
-
+        cocktail_db.save_cocktail_name(cocktail_name)
+        return '', 204
     except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return str(e), 500
 
-
+# for getting saved cocktail names
 @app.route('/saved_cocktails', methods=['GET'])
-def get_saved_cocktail_names_route():
+def get_saved_cocktails():
     try:
-        cocktail_names = get_saved_cocktail_names_from_db()
-        print("Cocktail names heeeere:", cocktail_names)  
-        return jsonify({"saved_cocktails": cocktail_names}), 200
+        saved_cocktails = cocktail_db.get_saved_cocktail_names_from_db()
+        return jsonify(saved_cocktails)
     except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return str(e), 500
 
-
-@app.route("/delete_saved_cocktail_names", methods=['DELETE'])
-def delete_saved_cocktail_names():
+# for deleting saved cocktail names
+@app.route('/delete_saved_cocktails', methods=['DELETE'])
+def delete_saved_cocktails():
     try:
-        delete_all_saved_cocktail_names()
-        return jsonify({"message": "All entries deleted from saved_cocktail_names table"}), 200
-
+        cocktail_db.delete_all_saved_cocktail_names()
+        return '', 204
     except DBConnectionError as e:
-        return jsonify({"error": str(e)}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return str(e), 500
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+if __name__ == '__main__':
+    app.run(debug=True)
