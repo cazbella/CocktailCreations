@@ -2,9 +2,9 @@
 
 ********************************************
 
-CREATE DATABASE cocktaildb
+CREATE DATABASE cocktaildb;
 
-USE cocktaildb
+USE cocktaildb;
 
 CREATE TABLE cocktail_names (
     id VARCHAR(255) PRIMARY KEY,
@@ -100,11 +100,11 @@ CREATE TABLE measures (
 
 
 
--- SELECT * FROM cocktail_names
--- SELECT * FROM alcoholic_status
--- SELECT * FROM glass_type
--- SELECT * FROM drinks_information
--- SELECT * FROM ingredients
+-- SELECT * FROM cocktail_names;
+-- SELECT * FROM alcoholic_status;
+-- SELECT * FROM glass_type;
+-- SELECT * FROM drinks_information;
+-- SELECT * FROM ingredients;
 
 -- SELECT DISTINCT c.name
 -- FROM cocktail_names c
@@ -273,9 +273,9 @@ SELECT * FROM saved_cocktail_names;
 
 Potential additions by susan
 
-START TRANSACTION;
-
 USE cocktaildb;
+
+START TRANSACTION;
 
 ALTER TABLE cocktail_names MODIFY COLUMN name VARCHAR(255) NOT NULL;
 
