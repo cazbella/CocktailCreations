@@ -203,7 +203,7 @@ Integration testing focused on verifying the server responses to various client 
 - Each server fetch operation was tested to ensure proper functionality before integrating with the frontend.
 - Some of these integration tests were conducted using Python's unittest framework.
 - Test cases included fetching cocktail details, fetching all ingredients, and saving cocktail names to the database.
-- An example of integration test can be found in `server-fetch-tests.py`.
+- An example of integration test can be found in the files starting 'test'.
 
 ### Frontend Testing
 
