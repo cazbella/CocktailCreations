@@ -271,11 +271,12 @@ SELECT * FROM saved_cocktail_names;
 
 ************************************************************
 
-Potential additions by susan
+Additions by susan
 
-USE cocktaildb;
 
 START TRANSACTION;
+
+USE cocktaildb;
 
 ALTER TABLE cocktail_names MODIFY COLUMN name VARCHAR(255) NOT NULL;
 
