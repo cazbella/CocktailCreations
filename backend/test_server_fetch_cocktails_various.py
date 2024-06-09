@@ -1,5 +1,5 @@
 # this file has tests to test the server response. 
-# it tests fetching cocktail details, fetching all the ingredients and fetching the details of a particular cocktail. Now it also tests adding a cocktail to the saved_cocktail_names table. 
+# it tests fetching cocktail details, fetching all the ingredients and fetching the details of a particular cocktail. Now it also tests adding a cocktail to the saved_cocktails table.
 
 import unittest
 import json
