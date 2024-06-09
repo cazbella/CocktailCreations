@@ -164,8 +164,10 @@ class CocktailDB:
                               "(SELECT id FROM cocktail_names WHERE name = %s);")
             cursor.execute(query_measures, (cocktail_name,))
             measures_row = cursor.fetchone()
-            
-            measures = [value for value in measures_row.values() if value is not None]
+
+            measures = []
+            if measures_row is not None:
+                measures = [value for value in measures_row.values() if value is not None]
             
             details['ingredients'] = ingredients
             details['instructions'] = instructions
