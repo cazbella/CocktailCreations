@@ -1,9 +1,9 @@
-// This is code that creates the database. In order to populate the database please use cocktail_data_utils.py 
+--
+-- This is code that creates the database. In order to populate the database please use cocktail_data_utils.py
+--
 
-********************************************
-
-CREATE DATABASE cocktaildb;
-
+DROP DATABASE IF EXISTS cocktaildb;
+CREATE DATABASE IF NOT EXISTS cocktaildb;
 USE cocktaildb;
 
 CREATE TABLE cocktail_names (
@@ -66,7 +66,9 @@ CREATE TABLE alcoholic_status (
     PRIMARY KEY (cocktail_id, status)
 );
 
-// to create saved cocktails TABLE
+--
+-- to create saved cocktails TABLE
+--
 
 CREATE TABLE saved_cocktails (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -93,11 +95,9 @@ CREATE TABLE measures (
     PRIMARY KEY (cocktail_id)
 );
 
-
-**********************************************
-
-*****Below are the queries run to test the queries that were used in db_utils. *********
-
+--
+-- Below are the queries run to test the queries that were used in db_utils.
+--
 
 
 -- SELECT * FROM cocktail_names;
@@ -203,24 +203,24 @@ CREATE TABLE measures (
 -- WHERE 
 --     cocktail_names.name = 'broadside';
 
--- CREATE TABLE saved_cocktail_names (
+-- CREATE TABLE saved_cocktails (
 --     id INT AUTO_INCREMENT PRIMARY KEY,
 --     name VARCHAR(255) NOT NULL
 -- );
 
--- INSERT INTO saved_cocktail_names (name) VALUES ('White Russian');
+-- INSERT INTO saved_cocktails (name) VALUES ('White Russian');
 
--- SELECT * FROM saved_cocktail_names WHERE name = 'White Russian';
+-- SELECT * FROM saved_cocktails WHERE name = 'White Russian';
 
-SELECT * FROM saved_cocktail_names;
--- DELETE FROM saved_cocktail_names;
+SELECT * FROM saved_cocktails;
+-- DELETE FROM saved_cocktails;
 
--- INSERT INTO saved_cocktail_names (name) VALUES ('White Russian');
+-- INSERT INTO saved_cocktails (name) VALUES ('White Russian');
 
--- SELECT * FROM saved_cocktail_names WHERE name = 'White Russian';
+-- SELECT * FROM saved_cocktails WHERE name = 'White Russian';
 
--- SELECT * FROM saved_cocktail_names;
--- DELETE FROM saved_cocktail_names;
+-- SELECT * FROM saved_cocktails;
+-- DELETE FROM saved_cocktails;
 
 -- SELECT * FROM cocktail_names WHERE name = 'brandy sour';
 
@@ -269,10 +269,9 @@ SELECT * FROM saved_cocktail_names;
 -- WHERE 
 --     cn.name = 'grasshopper';
 
-************************************************************
-
-Additions by susan
-
+--
+-- Additions by susan
+--
 
 START TRANSACTION;
 
