@@ -164,8 +164,10 @@ class CocktailDB:
                               "(SELECT id FROM cocktail_names WHERE name = %s);")
             cursor.execute(query_measures, (cocktail_name,))
             measures_row = cursor.fetchone()
-            
-            measures = [value for value in measures_row.values() if value is not None]
+
+            measures = []
+            if measures_row is not None:
+                measures = [value for value in measures_row.values() if value is not None]
             
             details['ingredients'] = ingredients
             details['instructions'] = instructions
@@ -189,7 +191,7 @@ class CocktailDB:
             db_connection = self._connect_to_db()
             cursor = db_connection.cursor()
 
-            query = "INSERT INTO saved_cocktail_names (name) VALUES (%s)"
+            query = "INSERT INTO saved_cocktails (name) VALUES (%s)"
             cursor.execute(query, (cocktail_name,))
             db_connection.commit()
 
@@ -210,7 +212,7 @@ class CocktailDB:
             db_connection = self._connect_to_db()
             cursor = db_connection.cursor()
 
-            query = "SELECT DISTINCT name FROM saved_cocktail_names;"
+            query = "SELECT DISTINCT name FROM saved_cocktails;"
             cursor.execute(query)
             results = cursor.fetchall()
 
@@ -232,16 +234,16 @@ class CocktailDB:
             db_connection = self._connect_to_db()
             cursor = db_connection.cursor()
 
-            query = "DELETE FROM saved_cocktail_names"
+            query = "DELETE FROM saved_cocktails"
             cursor.execute(query)
             db_connection.commit()
 
         except Exception as e:
             if db_connection:
                 db_connection.rollback()
-            logging.error(f"Failed to delete entries from saved_cocktail_names table: {e}")
-            print(f"Failed to delete entries from saved_cocktail_names table: {e}")
-            raise DBConnectionError(f"Failed to delete entries from saved_cocktail_names table: {e}")
+            logging.error(f"Failed to delete entries from saved_cocktails table: {e}")
+            print(f"Failed to delete entries from saved_cocktails table: {e}")
+            raise DBConnectionError(f"Failed to delete entries from saved_cocktails table: {e}")
         finally:
             if db_connection:
                 db_connection.close()
