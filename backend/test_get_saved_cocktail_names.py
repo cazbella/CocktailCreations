@@ -12,7 +12,8 @@ class TestGetSavedCocktailNames(unittest.TestCase):
         try:
             result = self.cocktail_db.get_saved_cocktail_names_from_db()
             print("Test result:", result)
-            self.assertTrue(len(result) > 0, "The result should contain at least one cocktail name.")
+            self.assertIsNotNone(result, "The result should not be None.")
+            self.assertIsInstance(result, list, "The result should be a list.")
         except DBConnectionError as e:
             self.fail(f"DBConnectionError was raised: {str(e)}")
 

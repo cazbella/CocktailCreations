@@ -70,7 +70,7 @@ CREATE TABLE alcoholic_status (
 -- to create saved cocktails TABLE
 --
 
-CREATE TABLE saved_cocktails (
+CREATE TABLE saved_cocktail_names (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );

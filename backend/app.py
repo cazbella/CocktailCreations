@@ -24,7 +24,7 @@ from flask_cors import CORS
 from db_utils import CocktailDB, DBConnectionError
 
 app = Flask(__name__)
-CORS(app)  # need CORS as had lots of errors
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})   # need CORS as had lots of errors
 
 # initialise the CocktailDB instance
 cocktail_db = CocktailDB('cocktaildb')
