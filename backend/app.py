@@ -1,13 +1,10 @@
 # This file defines the Flask application, including routes to handle incoming requests. It serves as the backend API server. It receives requests from clients, processes them, interacts with our database via functions defined in db_utils.py, and sends back responses.
 
 """
-Run the server in your terminal using Flask command: choose the one that works
-
-FLASK_APP=app.py flask run
-OR
-python3 -m flask --app app run --debug
-OR
-flask --app app run --debug
+# MY NOTES
+# # MUST DO - Run the server in your terminal using Flask command: choose the one that works
+# FLASK_APP=app.py flask run
+# OR python3 -m flask --app build_api run --debug OR flask --app build_api run --debug
 
 # python3 app.py
 

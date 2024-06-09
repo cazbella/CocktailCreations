@@ -2,7 +2,7 @@ import requests
 import mysql.connector
 from config import HOST, USER, PASSWORD
 
-# this populates the tables with data from the database.sql it is not used by the frontend,.
+# this populates the tables with data from the mySQL.txt it is not used by the frontend,. 
 # I wanted to use the data in the cocktailsdb online to populate this database so i could use both one i created and the online database to satisfy both of these requirements. However, the online APIs don't let you get specific ingredients (without paying) or all the cocktails. They do, However, allow you to get cocktails by letter. So I had the idea to loop trhough all the letters and get the data that way!
 
 db_name = "cocktaildb"
