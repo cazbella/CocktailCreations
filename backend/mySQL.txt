@@ -2,9 +2,9 @@
 
 ********************************************
 
-CREATE DATABASE cocktailsdb;
+CREATE DATABASE cocktaildb;
 
-USE cocktailsdb;
+USE cocktaildb;
 
 CREATE TABLE cocktail_names (
     id VARCHAR(255) PRIMARY KEY,
