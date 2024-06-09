@@ -2,11 +2,12 @@
 
 # This code works to use the created database and the current db_utils and app.py to return a cocktail/s with only the selected ingredients. Currently the ingredient name needs to be exact but this should be ok as the user is ticking the boxes to select incredients. This should eliminate any need for user input error handling. need to put a filter on the list
 
-# defines a Python class CocktailApp, which provides methods to interact with the Flask API server (app.py). It encapsulates HTTP requests to fetch cocktails and cocktail details. This class can be used in other Python scripts or applications to fetch data from the server.
+# defines a Python class CocktailApp, which provides methods to interact with the Flask API server (app.py). It encapsulates HTTP requests to fetch cocktails and cocktail details.
 
 import json
 import requests
-from db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details
+# you may need to move this file to the root directory if you would like to run this. I could not get the filepath to work despite reasearch
+from ..db_utils import show_cocktails_from_picked_ingredients, get_cocktail_details
 
 class CocktailApp:
     def __init__(self, server_url):

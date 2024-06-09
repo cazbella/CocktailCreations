@@ -3,10 +3,9 @@
 # this would be a seperate page and an item for future development
 
 import random
-from db_config import get_db_connection
-
+from db_utils import connect_to_db
 def fetch_all_ingredients():
-    connection = get_db_connection()
+    connection = connect_to_db()
     cursor = connection.cursor()
     cursor.execute("SELECT DISTINCT ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, ingredient8, ingredient9, ingredient10, ingredient11, ingredient12, ingredient13, ingredient14, ingredient15 FROM ingredients")
     rows = cursor.fetchall()

@@ -13,6 +13,10 @@
 
     height: 70%;
   }
+
+  .card-text {
+    text-align: justify;
+  }
   
 
   .cocktail-list {

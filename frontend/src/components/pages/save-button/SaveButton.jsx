@@ -22,7 +22,7 @@ const SaveButton = ({ cocktail }) => {
         console.log("Cocktail name to save:", cocktailName); // Debugging
 
         try {
-            const response = await fetch('http://localhost:5000/save_cocktail_name', {
+            const response = await fetch('http://localhost:5000/save_cocktail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,12 +30,11 @@ const SaveButton = ({ cocktail }) => {
                 body: JSON.stringify({ name: cocktailName })
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (response.status === 204) {
                 console.log("Cocktail name saved successfully");
                 alert("Cocktail name saved successfully");
             } else {
+                const data = await response.json();
                 console.error("Failed to save cocktail name:", data);
                 alert("Failed to save cocktail name: " + data.error);
             }

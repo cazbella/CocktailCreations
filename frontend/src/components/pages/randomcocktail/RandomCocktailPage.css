@@ -38,6 +38,10 @@ h1 {
   color: white; 
 }
 
+.card-text {
+  text-align: justify;
+}
+
 .card-image {
   margin-bottom: 15px;
   display: flex;

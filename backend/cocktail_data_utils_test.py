@@ -1,3 +1,5 @@
+# this tests the code that is uesd to create the database.
+
 import unittest
 # this .mock allows us to mock a database so the sata isn't added to our database when testing. 
 from unittest.mock import patch, MagicMock
