@@ -10,6 +10,12 @@ CocktailCreations is an application designed to inspire cocktail enthusiasts of 
 - **GitHub:** [Cazbella](https://github.com/Cazbella)
 - **LinkedIn:** [Caroline-Lane](https://www.linkedin.com/in/caroline-lane7/) 
 
+#### Hannah
+- **GitHub:** [hlancs](https://github.com/hlancs)
+
+#### Susan
+- **GitHub:** [Emmy-S](https://github.com/Emmy-S)
+
 
 ## Table of Contents
 - [Description](#description)
