@@ -1,4 +1,3 @@
-// IngredientPickerForm.js
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +15,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
 
   const fetchIngredients = async () => {
     try {
-      const response = await fetch('http://CocktailCreations.onrender.com/ingredients');
+      const response = await fetch('https://cocktailcreations.onrender.com/ingredients');
       const data = await response.json();
 
       if (response.ok) {

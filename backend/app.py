@@ -16,6 +16,7 @@
 
 """
 
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from db_utils import CocktailDB, DBConnectionError
@@ -79,7 +80,7 @@ def delete_saved_cocktails():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=False, ssl_context=('path/to/cert.pem', 'path/to/key.pem'))
 
 
 
