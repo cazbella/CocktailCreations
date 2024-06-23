@@ -1,3 +1,4 @@
+// IngredientPickerForm.js
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +8,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredIngredients, setFilteredIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchIngredients();
@@ -15,7 +17,6 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
   const fetchIngredients = async () => {
     try {
       const response = await fetch('http://CocktailCreations.onrender.com/ingredients');
-      // const response = await fetch('http://localhost:5000/ingredients');
       const data = await response.json();
 
       if (response.ok) {
@@ -23,9 +24,13 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
         setFilteredIngredients(data);
       } else {
         console.error('Error fetching ingredients:', data.error);
+        setErrorMessage(data.error);
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Error fetching ingredients:', error);
+      setErrorMessage(error.message);
+      setShowModal(true);
     }
   };
 
@@ -79,14 +84,14 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
       {/* Modal */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>No Cocktails Available</Modal.Title>
+          <Modal.Title>Error</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          No cocktails available, please pick another ingredient.
+          {errorMessage}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
-            Back
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

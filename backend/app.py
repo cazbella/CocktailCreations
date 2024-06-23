@@ -16,14 +16,12 @@
 
 """
 
-# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from db_utils import CocktailDB, DBConnectionError
 
 app = Flask(__name__)
 
-# Enable CORS for your specific frontend URLs
 CORS(app, resources={r"/*": {"origins": ["https://cazbella.github.io", "https://CocktailCreations.onrender.com", "http://localhost:5173"]}})
 
 # Initialise the CocktailDB instance
@@ -35,7 +33,7 @@ def get_ingredients():
         ingredients = cocktail_db.get_ingredients_from_db()
         return jsonify(ingredients)
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/cocktails', methods=['POST'])
 def show_cocktails():
@@ -44,7 +42,7 @@ def show_cocktails():
         cocktails = cocktail_db.show_cocktails_from_picked_ingredients(selected_ingredients)
         return jsonify(cocktails)
     except (DBConnectionError, ValueError) as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/cocktail', methods=['GET'])
 def get_cocktail_details():
@@ -53,7 +51,7 @@ def get_cocktail_details():
         details = cocktail_db.get_cocktail_details(cocktail_name)
         return jsonify(details)
     except (DBConnectionError, ValueError) as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/save_cocktail', methods=['POST'])
 def save_cocktail():
@@ -62,7 +60,7 @@ def save_cocktail():
         cocktail_db.save_cocktail_name(cocktail_name)
         return '', 204
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/saved_cocktails', methods=['GET'])
 def get_saved_cocktails():
@@ -70,7 +68,7 @@ def get_saved_cocktails():
         saved_cocktails = cocktail_db.get_saved_cocktail_names_from_db()
         return jsonify(saved_cocktails)
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/delete_saved_cocktails', methods=['DELETE'])
 def delete_saved_cocktails():
@@ -78,10 +76,11 @@ def delete_saved_cocktails():
         cocktail_db.delete_all_saved_cocktail_names()
         return '', 204
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=False)
+
 
 
     # changed debug to false here from true for production 23/06/24
