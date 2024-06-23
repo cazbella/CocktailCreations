@@ -16,26 +16,26 @@
 
 """
 
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from db_utils import CocktailDB, DBConnectionError
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})   # need CORS as had lots of errors
 
-# initialise the CocktailDB instance
+CORS(app, resources={r"/*": {"origins": ["https://cazbella.github.io", "https://CocktailCreations.onrender.com", "http://localhost:5173"]}})
+
+# Initialise the CocktailDB instance
 cocktail_db = CocktailDB('cocktaildb')
 
-# for populating ingredient picker page
 @app.route('/ingredients', methods=['GET'])
 def get_ingredients():
     try:
         ingredients = cocktail_db.get_ingredients_from_db()
         return jsonify(ingredients)
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
-# for getting cocktails based on ingredients
 @app.route('/cocktails', methods=['POST'])
 def show_cocktails():
     selected_ingredients = request.json.get('ingredients', [])
@@ -43,9 +43,8 @@ def show_cocktails():
         cocktails = cocktail_db.show_cocktails_from_picked_ingredients(selected_ingredients)
         return jsonify(cocktails)
     except (DBConnectionError, ValueError) as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
-# for getting all details for a cocktail based on a name
 @app.route('/cocktail', methods=['GET'])
 def get_cocktail_details():
     cocktail_name = request.args.get('name')
@@ -53,9 +52,8 @@ def get_cocktail_details():
         details = cocktail_db.get_cocktail_details(cocktail_name)
         return jsonify(details)
     except (DBConnectionError, ValueError) as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
-# for saving the cocktail
 @app.route('/save_cocktail', methods=['POST'])
 def save_cocktail():
     cocktail_name = request.json.get('name')
@@ -63,25 +61,27 @@ def save_cocktail():
         cocktail_db.save_cocktail_name(cocktail_name)
         return '', 204
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
-# for getting saved cocktail names
 @app.route('/saved_cocktails', methods=['GET'])
 def get_saved_cocktails():
     try:
         saved_cocktails = cocktail_db.get_saved_cocktail_names_from_db()
         return jsonify(saved_cocktails)
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
-# for deleting saved cocktail names
 @app.route('/delete_saved_cocktails', methods=['DELETE'])
 def delete_saved_cocktails():
     try:
         cocktail_db.delete_all_saved_cocktail_names()
         return '', 204
     except DBConnectionError as e:
-        return str(e), 500
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, ssl_context=('path/to/cert.pem', 'path/to/key.pem'))
+
+
+
+    # changed debug to false here from true for production 23/06/24

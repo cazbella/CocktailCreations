@@ -1,22 +1,16 @@
-# "This file is used to specify the dependencies required by the project to run properly,
-# for example, dependencies
-# to update this run 'pip3 freeze >> requirements.txt'
-# in the same directory as this file.
-
-# the command I used to run the server is flask --app run --debug
-
-mysql-connector-python~=8.3.0
-pip~=23.2.1
-requests~=2.31.0
 blinker==1.8.2
 certifi==2024.2.2
 charset-normalizer==3.3.2
 click==8.1.7
 Flask==3.0.3
 Flask-Cors==4.0.1
+gunicorn==22.0.0
 idna==3.7
 itsdangerous==2.2.0
 Jinja2==3.1.4
 MarkupSafe==2.1.5
+mysql-connector-python==8.3.0
+packaging==24.1
+requests==2.31.0
 urllib3==2.2.1
 Werkzeug==3.0.3
