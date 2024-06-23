@@ -19,7 +19,8 @@ const IngredientPickerPage = () => {
 
   const handleGetCocktails = async () => {
     try {
-      const response = await fetch('http://localhost:5000/cocktails', {
+      // const response = await fetch('http://localhost:5000/cocktails', {
+      const response = await fetch('http://CocktailCreations.onrender.com/cocktails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +44,8 @@ const IngredientPickerPage = () => {
 
   const handleGetCocktailDetails = async (cocktailName) => {
     try {
-      const response = await fetch(`http://localhost:5000/cocktail?name=${encodeURIComponent(cocktailName)}`, {
+      // const response = await fetch(`http://localhost:5000/cocktail?name=${encodeURIComponent(cocktailName)}`, {
+        const response = await fetch(`http://CocktailCreations.onrender.com/cocktail?name=${encodeURIComponent(cocktailName)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

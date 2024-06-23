@@ -21,7 +21,10 @@ from flask_cors import CORS
 from db_utils import CocktailDB, DBConnectionError
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})   # need CORS as had lots of errors
+
+CORS(app, resources={r"/*": {"origins": "https://CocktailCreations.onrender.com"}})
+
+# CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})   # need CORS as had lots of errors
 
 # initialise the CocktailDB instance
 cocktail_db = CocktailDB('cocktaildb')
@@ -84,4 +87,6 @@ def delete_saved_cocktails():
         return str(e), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
+
+    # changed debug to false here from true for production 23/06/24

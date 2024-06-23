@@ -14,7 +14,8 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
 
   const fetchIngredients = async () => {
     try {
-      const response = await fetch('http://localhost:5000/ingredients');
+      const response = await fetch('http://CocktailCreations.onrender.com/ingredients');
+      // const response = await fetch('http://localhost:5000/ingredients');
       const data = await response.json();
 
       if (response.ok) {
