@@ -141,10 +141,10 @@ class CocktailDB:
             cursor.execute(query_image, (cocktail_name,))
             image_url = cursor.fetchone()
 
-            query_video = ("SELECT video_url FROM videos vid JOIN cocktail_names cn ON cn.id = vid.cocktail_id "
-                           "WHERE cn.name = %s;")
-            cursor.execute(query_video, (cocktail_name,))
-            video_url = cursor.fetchone()
+            # query_video = ("SELECT video_url FROM videos vid JOIN cocktail_names cn ON cn.id = vid.cocktail_id "
+            #                "WHERE cn.name = %s;")
+            # cursor.execute(query_video, (cocktail_name,))
+            # video_url = cursor.fetchone()
 
             query_measures = ("SELECT measure1, measure2, measure3, measure4, measure5, measure6, measure7, "
                               "measure8, measure9, measure10, measure11, measure12, measure13, measure14, measure15 "
