@@ -158,7 +158,7 @@ class CocktailDB:
             details['ingredients'] = ingredients
             details['instructions'] = instructions
             details['image_url'] = image_url
-            details['video_url'] = video_url
+            # details['video_url'] = video_url
             details['measures'] = measures
 
         except Exception as e:
