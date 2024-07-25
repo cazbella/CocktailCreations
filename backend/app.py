@@ -26,7 +26,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["https://cazbella.github.io", "https://CocktailCreations.onrender.com", "http://localhost:5173"]}})
 
 # Initialise the CocktailDB instance
-cocktail_db = CocktailDB('cocktaildb')
+cocktail_db = CocktailDB('sql8717963')
 
 @app.route('/ingredients', methods=['GET'])
 def get_ingredients():
