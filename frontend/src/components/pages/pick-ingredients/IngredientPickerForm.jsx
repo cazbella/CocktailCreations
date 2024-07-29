@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,6 +8,7 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
   const [filteredIngredients, setFilteredIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchIngredients();
@@ -30,16 +31,14 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
       console.error('Error fetching ingredients:', error);
       setErrorMessage(error.message);
       setShowModal(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSearch = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = allIngredients.filter(ingredient =>
-      ingredient.toLowerCase().includes(term)
-    );
-    setFilteredIngredients(filtered);
   };
 
   const handleSelectIngredient = (ingredient) => {
@@ -49,6 +48,12 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
   };
 
   const handleCloseModal = () => setShowModal(false);
+
+  const filteredIngredientsMemo = useMemo(() => {
+    return allIngredients.filter(ingredient =>
+      ingredient.toLowerCase().includes(searchTerm)
+    );
+  }, [allIngredients, searchTerm]);
 
   return (
     <div className="ingredient-picker-container">
@@ -60,13 +65,17 @@ const IngredientPickerForm = ({ onSelectIngredient, onGetCocktails, selectedIngr
         onChange={handleSearch}
         className="search-input"
       />
-      <ul className="ingredient-list">
-        {filteredIngredients.map((ingredient, index) => (
-          <li key={index} className="ingredient-item">
-            <button onClick={() => handleSelectIngredient(ingredient)}>{ingredient}</button>
-          </li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading ingredients...</p>
+      ) : (
+        <ul className="ingredient-list">
+          {filteredIngredientsMemo.map((ingredient, index) => (
+            <li key={index} className="ingredient-item">
+              <button onClick={() => handleSelectIngredient(ingredient)}>{ingredient}</button>
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="selected-ingredients-container">
         <h3 className='selected-title'>Selected Ingredient:</h3>
         <ul className="selected-ingredients-list">
